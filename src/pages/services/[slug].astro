@@ -1,0 +1,40 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, SERVICES } from '../../data/site';
+
+export function getStaticPaths() {
+  return SERVICES.map((s) => ({ params: { slug: s.slug }, props: { s } }));
+}
+const { s } = Astro.props;
+const others = SERVICES.filter((o) => o.slug !== s.slug);
+const title = `${s.name} | London, Hampshire, Dorset`;
+const description = `${s.body.split('. ')[0]}. ${s.name} from House of Dimah, for businesses across London, Hampshire and Dorset.`;
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: s.name,
+  serviceType: s.name,
+  description: s.body,
+  url: `${SITE.url}/services/${s.slug}/`,
+  provider: { '@id': `${SITE.url}/#org` },
+  areaServed: SITE.areas.map((a) => ({ '@type': 'AdministrativeArea', name: a })),
+};
+---
+<Base title={title} description={description} schema={[serviceSchema]} breadcrumbs={[{ name: 'Services', path: '/#services' }, { name: s.name, path: `/services/${s.slug}/` }]}>
+  <article class="inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/#services">Services</a> / <span aria-current="page">{s.name}</span></nav>
+      <h1>{s.name}</h1>
+      <p class="lede">{s.body}</p>
+      <ul class="svc-chips plain">{s.tags.map((t) => <li><span>{t}</span></li>)}</ul>
+      <p class="where">For businesses across London, Hampshire and Dorset.</p>
+      <a class="btn" href="/#start">Start here</a>
+    </div>
+  </article>
+  <section class="inner more">
+    <div class="wrap">
+      <h2>Other services</h2>
+      <ul class="others">{others.map((o) => <li><a href={`/services/${o.slug}/`}>{o.name}</a></li>)}</ul>
+    </div>
+  </section>
+</Base>

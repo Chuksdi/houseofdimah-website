@@ -1,0 +1,84 @@
+---
+import { SITE } from '../data/site';
+const arrow = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"></path></svg>';
+const needs = ['Branding or a rebrand', 'Social media', 'Photo & video', 'A new website', 'How we talk about ourselves', 'An outside view', 'Content for events', 'Not sure yet'];
+const whens = ['As soon as possible', 'In the next few months', 'Later this year', 'Just exploring'];
+const budgets = ['A one-off project', 'Monthly support', 'Both', 'Not sure yet'];
+---
+<footer class="foot" id="contact">
+  <div class="wrap cta-band intake" id="start">
+    <div class="isteps" aria-hidden="true"><span class="on"></span><span></span><span></span></div>
+
+    <!-- Netlify Forms: the form is plain HTML, so it works and is detected at build time -->
+    <form name="start" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="bot-field" id="intake">
+      <input type="hidden" name="form-name" value="start">
+      <p hidden><label>Leave this empty <input name="bot-field"></label></p>
+
+      <fieldset class="istep cur" data-step="1">
+        <legend class="sr">Start here, step 1 of 3</legend>
+        <span class="label">Start here · step 1 of 3</span>
+        <p class="ih">Tell us what's going on.</p>
+        <p class="isub">Pick anything that's on your mind. More than one is fine, and "not sure yet" is a perfectly good answer too.</p>
+        <div class="chips">
+          {needs.map((n) => <label class="chip"><input type="checkbox" name="needs" value={n}><span>{n}</span></label>)}
+        </div>
+        <div class="field wide"><label for="story">In a sentence or two, what's happening?</label><textarea id="story" name="story" placeholder="We've just opened a second site and our Instagram doesn't reflect who we are any more."></textarea></div>
+        <div class="inav"><span class="ialt">Takes about a minute.</span><button class="btn" type="button" data-next>Next <Fragment set:html={arrow} /></button></div>
+        <p class="ialt">Rather just email? <a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+      </fieldset>
+
+      <fieldset class="istep" data-step="2">
+        <legend class="sr">Start here, step 2 of 3</legend>
+        <span class="label">Start here · step 2 of 3</span>
+        <p class="ih">Who are we talking to?</p>
+        <div class="fields">
+          <div class="field"><label for="nm">Your name</label><input id="nm" name="name" type="text" autocomplete="name" required></div>
+          <div class="field"><label for="biz">Business</label><input id="biz" name="business" type="text" autocomplete="organization"></div>
+          <div class="field"><label for="em">Email</label><input id="em" name="email" type="email" autocomplete="email" required></div>
+          <div class="field"><label for="ph">Phone (optional)</label><input id="ph" name="phone" type="tel" autocomplete="tel"></div>
+          <div class="field wide"><label for="web">Website or Instagram</label><input id="web" name="website" type="text" placeholder="So we can have a look before we talk"></div>
+        </div>
+        <div class="inav"><button class="iback" type="button" data-back>← Back</button><button class="btn" type="button" data-next>Next <Fragment set:html={arrow} /></button></div>
+      </fieldset>
+
+      <fieldset class="istep" data-step="3">
+        <legend class="sr">Start here, step 3 of 3</legend>
+        <span class="label">Start here · step 3 of 3</span>
+        <p class="ih">When are you thinking?</p>
+        <div class="chips">
+          {whens.map((w) => <label class="chip"><input type="radio" name="when" value={w}><span>{w}</span></label>)}
+        </div>
+        <p class="label">Roughly what do you have in mind?</p>
+        <div class="chips">
+          {budgets.map((b) => <label class="chip"><input type="radio" name="budget" value={b}><span>{b}</span></label>)}
+        </div>
+        <div class="inav"><button class="iback" type="button" data-back>← Back</button><button class="btn" type="submit">Loop us in <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12L12 4M6 4h6v6"></path></svg></button></div>
+      </fieldset>
+    </form>
+
+    <div class="istep idone" data-step="4" role="status" aria-live="polite">
+      <span class="label">Sent</span>
+      <p class="ih">Thanks. We've got it.</p>
+      <p class="isub">Chuks or Kat will read it themselves and get back to you.</p>
+      <div class="icard"><b>What happens next</b>
+        <ol><li>We look at your business and anything you've linked, so we come prepared.</li><li>We get in touch within 24 hours to find a time to talk.</li><li>We talk things through, then send you a short plan of how we can help.</li></ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap three">
+    <div><h2 class="h3">Brand</h2><p>Story, identity and guidelines your team can use.</p></div>
+    <div><h2 class="h3">Content</h2><p>Photo, video, social and websites, on a rhythm that fits.</p></div>
+    <div><h2 class="h3">Execution</h2><p>Digital experiences and strategic narrative. Built, launched and kept running.</p></div>
+  </div>
+  <div class="wrap bottom">
+    <span class="biglogo"><img src="/media/logo-white.png" alt="House of Dimah" width="260" height="240" loading="lazy"></span>
+    <div class="contact">
+      <p class="colhead">Say hello</p>
+      <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+      <span>{SITE.areas.join(' · ')}</span>
+      {(SITE.instagram || SITE.linkedin) && <span>{SITE.instagram && <a href={SITE.instagram}>Instagram</a>}{SITE.instagram && SITE.linkedin && ' · '}{SITE.linkedin && <a href={SITE.linkedin}>LinkedIn</a>}</span>}
+    </div>
+  </div>
+  <div class="fine"><span>© 2026 House of Dimah</span><span>No long contracts. You stay because it works.</span></div>
+</footer>

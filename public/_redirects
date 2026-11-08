@@ -1,0 +1,4 @@
+# One canonical host: https://houseofdimah.co.uk
+https://www.houseofdimah.co.uk/*  https://houseofdimah.co.uk/:splat  301!
+http://www.houseofdimah.co.uk/*   https://houseofdimah.co.uk/:splat  301!
+http://houseofdimah.co.uk/*       https://houseofdimah.co.uk/:splat  301!

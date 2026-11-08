@@ -1,0 +1,64 @@
+---
+import '../styles/site.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { SITE, ORG_SCHEMA } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  schema?: object[];
+  breadcrumbs?: { name: string; path: string }[];
+}
+const { title, description, schema = [], breadcrumbs } = Astro.props;
+// self-referencing canonical, absolute, matching the trailing-slash rule
+const canonical = new URL(Astro.url.pathname, SITE.url).href;
+const crumbSchema = breadcrumbs && {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [{ name: 'Home', path: '/' }, ...breadcrumbs].map((b, i) => ({
+    '@type': 'ListItem', position: i + 1, name: b.name, item: new URL(b.path, SITE.url).href,
+  })),
+};
+const blocks = [ORG_SCHEMA, ...schema, ...(crumbSchema ? [crumbSchema] : [])];
+---
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <link rel="canonical" href={canonical}>
+  <slot name="head" />
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content={SITE.name}>
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:url" content={canonical}>
+  <meta property="og:image" content={`${SITE.url}/media/logo-black.png`}>
+  <link rel="icon" type="image/png" href="/media/logo-black.png">
+  <link rel="sitemap" href="/sitemap.xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@700;800&family=Saira:wght@400;500;600;700&display=swap">
+  {blocks.map((b) => <script type="application/ld+json" set:html={JSON.stringify(b)} />)}
+  <script is:inline>
+    document.documentElement.classList.add('js');
+    try { if (localStorage.getItem('hod-mode') === 'light') document.documentElement.dataset.mode = 'light'; } catch (e) {}
+  </script>
+</head>
+<body>
+  <div class="page dark">
+    <slot name="hero" />
+    <Nav />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </div>
+  <script>
+    import '../scripts/site.ts';
+  </script>
+</body>
+</html>

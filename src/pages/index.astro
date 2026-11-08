@@ -1,0 +1,211 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE, SERVICES, CASES, REELS } from '../data/site';
+
+const title = 'Branding & Social Media Marketing | London, Hampshire, Dorset';
+const description = 'One team for your branding, content and social media marketing, every month. House of Dimah works with businesses across London, Hampshire and Dorset.';
+
+const arrowUp = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12L12 4M6 4h6v6"></path></svg>';
+
+const localBusiness = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  '@id': `${SITE.url}/#business`,
+  name: SITE.name,
+  url: `${SITE.url}/`,
+  image: `${SITE.url}/media/logo-black.png`,
+  email: SITE.email,
+  description,
+  areaServed: SITE.areas.map((a) => ({ '@type': 'AdministrativeArea', name: a })),
+  parentOrganization: { '@id': `${SITE.url}/#org` },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Services',
+    itemListElement: SERVICES.map((s) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: s.name, url: `${SITE.url}/services/${s.slug}/` } })),
+  },
+};
+const website = { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE.name, url: `${SITE.url}/` };
+
+const sectors = 'Our experience spans education, sports nutrition, finance and healthcare.'.split(' ');
+const steps = [
+  { n: '01', h: 'Understand', p: 'We learn your business, people and customers, so we can speak for you.', eg: 'e.g. interviews, audit, research', ph: ['a', 'Workshop with the founder', 'whiteboard, sticky notes'] },
+  { n: '02', h: 'Plan', p: 'A plan built around your story and sized to what you need:<br>what to say, where, and what it should achieve.', eg: 'e.g. story, content calendar, launch plan', ph: ['b', 'The quarter on one wall', 'plan, calendar, priorities'], mw: '64ch' },
+  { n: '03', h: 'Create', p: "We write, design, shoot and edit. You're part of it where it helps,<br>and nothing goes out without your yes.", eg: 'e.g. identity, shoots, site build', ph: ['c', 'Behind the scenes', 'shoot day, design on screen'], mw: '72ch' },
+  { n: '04', h: 'Publish', p: 'Posted on schedule, on brand, across the channels<br>that matter to you.', eg: 'Social, site, print', ph: ['b', 'It goes live', 'post, launch, campaign'], mw: '64ch' },
+  { n: '05', h: 'Learn', p: 'A regular review of what worked, and how the plan moves with it.', eg: 'e.g. review, next steps', ph: ['a', 'The review', "what worked, what's next"] },
+];
+const film = 'c a b c a b c a b c a b a c b a c b'.split(' ');
+const quotes = [
+  { q: 'He took the time to really understand who we were as an organisation… and used all of this to design what we have now! A complete brand identity, an online presence and a much greater sense of who we are.', who: 'Anna French', org: 'Leftfield Learning' },
+  { q: 'She brings senior marketing leadership, clear direction and the ability to turn strategy into action. At the BCA, she led our marketing through a significant moment of change. I would recommend Kat to any business looking for a strategic marketing partner who can understand the bigger picture, define the right approach and see it through to delivery.', who: 'Cait Allen, CEO', org: 'British Chiropractic Association, on Kat' },
+  { q: 'A special gift for creating striking visuals matched with colours that draw you in.', who: 'Mike J, Director', org: 'Frontiers UK, on Chuks' },
+  { q: "She was always focused on strategic objectives, her people's needs and the expected impact of the work we were planning together. Effortlessly professional and conscientious.", who: 'Matt Dunphy, Lead Consultant', org: 'GetSavi, on Kat' },
+];
+const days = [
+  ['Day 1', 'Welcome', 'Agreement signed, a direct line to the team, access to your accounts.'],
+  ['Week 1', 'Discovery', 'We interview you and your team and walk your business.'],
+  ['Week 2', 'The plan', 'A three-month plan, presented by Chuks and Kat for sign-off.'],
+  ['Week 3', 'Create', 'The first pieces get made: a shoot, a design, a page. Every detail planned with you in mind.'],
+  ['Week 4', 'Live', 'The first work goes out, then the rhythm begins.'],
+];
+---
+<Base title={title} description={description} schema={[localBusiness, website]}>
+  <section class="hero" slot="hero">
+    <div class="giant" aria-hidden="true">House of Dimah</div>
+    <div class="mark">
+      <img class="vd" src="/media/logo-build-dark.webp" alt="House of Dimah logo: the house builds itself, block by block" width="420" height="280" fetchpriority="high">
+      <img class="vl" src="/media/logo-build-light.webp" alt="" width="420" height="280" aria-hidden="true">
+    </div>
+    <div>
+      <h1>Agency expertise. In-house commitment.</h1>
+      <p class="sub">Branding, content and social media marketing, run by one team every month.</p>
+      <ul class="loc">{SITE.areas.map((a) => <li>{a}</li>)}</ul>
+    </div>
+    <span class="hint" aria-hidden="true">Scroll <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v15"></path><path d="M5.5 12.5L12 19l6.5-6.5"></path></svg></span>
+  </section>
+
+  <section class="statement">
+    <div class="wrap">
+      <p class="do-h" style="margin-top:0;max-width:46ch">We replace fragmented services and<br>constant oversight with one aligned team.<br>Crafting your story, building your presence,<br>and driving engagement across<br>every touchpoint.</p>
+      <a class="btn" href="#start" style="gap:6px">Let&rsquo;s tell your story<Fragment set:html={arrowUp} /></a>
+    </div>
+  </section>
+
+  <section class="svc" id="services" aria-labelledby="svc-h">
+    <div class="wrap" style="display:grid;gap:36px">
+      <div class="svc-lead">
+        <h2 id="svc-h">Every service starts with your story.</h2>
+        <p>Whether we’re delivering one specific service or your complete strategy, we ensure every element aligns with your vision.</p>
+      </div>
+      <div class="svc-grid">
+        {SERVICES.map((s, i) => (
+          <button class="svc-tile" type="button" aria-expanded="false" aria-controls={`svc-${i}`} data-svc={i}>
+            <b>{s.name}</b><span><span data-cta>What it covers</span> <Fragment set:html={arrowUp} /></span>
+          </button>
+        ))}
+      </div>
+      {SERVICES.map((s, i) => (
+        <div class="svc-pop" id={`svc-${i}`} role="region" aria-label={s.name} hidden>
+          <button class="svc-close" type="button" aria-label="Close" data-svc-close><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"></path></svg></button>
+          <h3>{s.name}</h3>
+          <p>{s.body}</p>
+          <div class="svc-chips">{s.tags.map((t) => <span>{t}</span>)}</div>
+          <a class="svc-more" href={`/services/${s.slug}/`}>More about {s.name.toLowerCase()} <Fragment set:html={arrowUp} /></a>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="time">
+    <div class="wrap">
+      <div class="grid">
+        <h2 class="big">In sync.<span>Always.</span></h2>
+        <div style="display:grid;gap:26px">
+          <p style="font-size:18px;color:var(--mute);max-width:42ch">Most agencies check in once a month. We stay close, because the better we know your business, the better the work. When things change for you, we change with you, at a pace that suits you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="method" id="method">
+    <div class="wrap head">
+      <h2>The House Method</h2>
+      <p>Brand, content and execution are how we think. The House Method is how the work actually gets done and it gets done well.</p>
+    </div>
+    <div class="cols">
+      <div class="steps">
+        {steps.map((s) => (
+          <div class="step">
+            <div class={`ph ${s.ph[0]}`}><span>{s.ph[1]}<br>{s.ph[2]}</span></div>
+            <div class="txt"><div class="stick" style={s.mw ? `max-width:${s.mw}` : undefined}>
+              <span class="num">{s.n}</span>
+              <h3>{s.h}</h3>
+              <p set:html={s.p} />
+              <span class="eg">{s.eg}</span>
+            </div></div>
+          </div>
+        ))}
+      </div>
+      <aside class="side" aria-hidden="true">
+        <div class="stick">
+          <p class="label">The House Method</p>
+          <div class="rail">{steps.map((s) => <span>{s.n}</span>)}</div>
+          <div class="film"><div class="strip">{film.map((c) => <div class={`ph ${c}`}></div>)}</div></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="statement" style="border-top:1px solid var(--rule)">
+    <div class="wrap">
+      <p>{sectors.map((w, i) => <><span class="w" style={`--i:${i}`}>{w}</span>{' '}</>)}</p>
+      <small>Different sectors, same way of working: we learn your business first, then tell its story.</small>
+    </div>
+  </section>
+
+  <section class="proof" aria-label="What clients say">
+    <div class="wrap" style="display:grid;gap:28px">
+      <div class="grid">
+        {quotes.map((q) => (
+          <figure class="qb"><blockquote class="face"><q>{q.q}</q><small>{q.who}<br>{q.org}</small></blockquote><div class="side2"></div></figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="statement" id="work" style="border-top:1px solid var(--rule);padding-bottom:clamp(32px,4vw,56px)">
+    <div class="wrap">
+      <h2 class="stmt-h"><span class="w" style="--i:0">Client</span> <span class="w" style="--i:1">stories</span></h2>
+      <small>Inside the strategic storytelling and design systems we’ve engineered.</small>
+    </div>
+  </section>
+
+  <section class="work" aria-label="Client stories">
+    <div class="wrap">
+      <div class="tiles">
+        {CASES.map((c) => (
+          <a class={`tile ${c.cls}`} href={`/work/${c.slug}/`}>
+            <img class={`shot ${c.imgCls ?? ''}`} src={c.img} alt={c.alt} loading="lazy">
+            <b>{c.name}</b><span class="tags">{c.tags.map((t) => <span>{t}</span>)}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="reels" aria-labelledby="reels-h">
+    <div class="wrap reels-head">
+      <h2 id="reels-h">Made to stop the scroll.</h2>
+      <p>Your complete content engine - reels and video scripted, filmed, edited, posted, and then measured.</p>
+    </div>
+    <div class="reel-rail" id="reelrail">
+      {REELS.map((r, i) => (
+        <figure class="rc"><video src={`/media/reels/${r.file}.mp4`} poster={`/media/reels/${r.file}.jpg`} autoplay={i < 5} loop muted playsinline preload={i < 5 ? 'metadata' : 'none'} data-lazy-play={i >= 5 ? '' : undefined} aria-label={`Reel: ${r.label}`}></video></figure>
+      ))}
+    </div>
+    <div class="reel-nav">
+      <button type="button" class="rn" aria-label="Previous reels" data-reel="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></button>
+      <button type="button" class="rn" aria-label="Next reels" data-reel="1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button>
+    </div>
+  </section>
+
+  <section class="days">
+    <div class="wrap" style="display:grid;gap:36px">
+      <h2>From hello to first work live in 30 days.</h2>
+      <div class="tl">
+        {days.map((d) => <div><b>{d[0]}</b><strong>{d[1]}</strong><span>{d[2]}</span></div>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="tiers" id="prices">
+    <div class="wrap" style="display:grid;gap:36px">
+      <h2>Ways to work with us.</h2>
+      <div class="tgrid">
+        <div class="tier"><h3 class="h4">Foundation</h3><span class="p">from £5,000</span><span class="tm">One-off, 6 to 8 weeks</span><ul><li>Brand identity or refresh</li><li>Website</li><li>Launch content</li></ul><a class="btn ghost" href="#contact">Ask about Foundation</a></div>
+        <div class="tier mid"><h3 class="h4">In-house</h3><span class="p">from £2,500<span style="font-size:18px">/mo</span></span><span class="tm">Monthly, rolling</span><ul><li>Brand, content and delivery, ongoing</li><li>Shoot days planned around you</li><li>Regular strategy calls</li></ul><a class="btn" href="#start">Start here</a></div>
+        <div class="tier"><h3 class="h4">Group</h3><span class="p">Bespoke</span><span class="tm">For multi-site businesses</span><ul><li>One brand across every site</li><li>Shoots across your locations</li><li>Planning days with your team</li></ul><a class="btn ghost" href="#contact">Talk to us</a></div>
+      </div>
+    </div>
+  </section>
+</Base>

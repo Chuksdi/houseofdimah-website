@@ -1,0 +1,15 @@
+{
+  "name": "houseofdimah-website",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "audit:local": "python3 ~/.claude/skills/seo-floor/scripts/audit.py http://localhost:4321"
+  },
+  "dependencies": {
+    "astro": "^5.18.2"
+  }
+}
