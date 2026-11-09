@@ -1,9 +1,10 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { CASES } from '../../data/site';
+import { getContent } from '../../lib/content';
 
-export function getStaticPaths() {
-  return CASES.map((c) => ({ params: { slug: c.slug }, props: { c } }));
+export async function getStaticPaths() {
+  const { cases } = await getContent();
+  return cases.map((c) => ({ params: { slug: c.slug }, props: { c } }));
 }
 const { c } = Astro.props;
 const title = `${c.name}: client story | House of Dimah`;
@@ -15,9 +16,9 @@ const description = `How House of Dimah worked with ${c.name}: ${c.tags.join(' a
       <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/#work">Client stories</a> / <span aria-current="page">{c.name}</span></nav>
       <h1>{c.name}</h1>
       <p class="tags-line">{c.tags.join(' · ')}</p>
-      <img class={`case-hero ${c.imgCls ?? ''}`} src={c.img} alt={c.alt}>
+      <img class={`case-hero ${c.fit ? 'fit' : ''}`} src={c.img} alt={c.alt} style={c.colour ? `background:${c.colour}` : undefined}>
       {/* TODO: port the full case study from this client's Case board on the Site Board */}
-      <p class="lede">The full story is on its way.</p>
+      <p class="lede">{c.summary || 'The full story is on its way.'}</p>
       <a class="btn" href="/#start">Start here</a>
     </div>
   </article>

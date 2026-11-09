@@ -10,6 +10,7 @@
     "audit:local": "python3 ~/.claude/skills/seo-floor/scripts/audit.py http://localhost:4321"
   },
   "dependencies": {
+    "@sanity/client": "^7.28.0",
     "astro": "^5.18.2"
   }
 }

@@ -1,6 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
-import { SITE, SERVICES, CASES, REELS } from '../data/site';
+import { SITE } from '../data/site';
+import { getContent, TILE_CLASSES } from '../lib/content';
+
+const { settings, services: SERVICES, cases: CASES, reels: REELS, quotes } = await getContent();
 
 const title = 'Branding & Social Media Marketing | London, Hampshire, Dorset';
 const description = 'One team for your branding, content and social media marketing, every month. House of Dimah works with businesses across London, Hampshire and Dorset.';
@@ -14,9 +17,9 @@ const localBusiness = {
   name: SITE.name,
   url: `${SITE.url}/`,
   image: `${SITE.url}/media/logo-black.png`,
-  email: SITE.email,
+  email: settings.email,
   description,
-  areaServed: SITE.areas.map((a) => ({ '@type': 'AdministrativeArea', name: a })),
+  areaServed: settings.areas.map((a) => ({ '@type': 'AdministrativeArea', name: a })),
   parentOrganization: { '@id': `${SITE.url}/#org` },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
@@ -35,12 +38,6 @@ const steps = [
   { n: '05', h: 'Learn', p: 'A regular review of what worked, and how the plan moves with it.', eg: 'e.g. review, next steps', ph: ['a', 'The review', "what worked, what's next"] },
 ];
 const film = 'c a b c a b c a b c a b a c b a c b'.split(' ');
-const quotes = [
-  { q: 'He took the time to really understand who we were as an organisation… and used all of this to design what we have now! A complete brand identity, an online presence and a much greater sense of who we are.', who: 'Anna French', org: 'Leftfield Learning' },
-  { q: 'She brings senior marketing leadership, clear direction and the ability to turn strategy into action. At the BCA, she led our marketing through a significant moment of change. I would recommend Kat to any business looking for a strategic marketing partner who can understand the bigger picture, define the right approach and see it through to delivery.', who: 'Cait Allen, CEO', org: 'British Chiropractic Association, on Kat' },
-  { q: 'Chukuma has done excellent work for us for several years. As an artist he has a special gift for creating striking visuals matched with colours that draw you in. Highly recommend his graphic design work.', who: 'Mike J, Director', org: 'Frontiers UK, on Chuks' },
-  { q: "She was always focused on strategic objectives, her people's needs and the expected impact of the work we were planning together. Effortlessly professional and conscientious.", who: 'Matt Dunphy, Lead Consultant', org: 'GetSavi, on Kat' },
-];
 const days = [
   ['Day 1', 'Welcome', 'Agreement signed, a direct line to the team, access to your accounts.'],
   ['Week 1', 'Discovery', 'We interview you and your team and walk your business.'],
@@ -59,7 +56,7 @@ const days = [
     <div>
       <h1>Agency expertise. In-house commitment.</h1>
       <p class="sub">Branding, content and social media marketing, run by one team every month.</p>
-      <ul class="loc">{SITE.areas.map((a) => <li>{a}</li>)}</ul>
+      <ul class="loc">{settings.areas.map((a) => <li>{a}</li>)}</ul>
     </div>
     <span class="hint" aria-hidden="true">Scroll <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v15"></path><path d="M5.5 12.5L12 19l6.5-6.5"></path></svg></span>
   </section>
@@ -147,7 +144,7 @@ const days = [
     <div class="wrap" style="display:grid;gap:28px">
       <div class="grid">
         {quotes.map((q) => (
-          <figure class="qb"><blockquote class="face"><q>{q.q}</q><small>{q.who}<br>{q.org}</small></blockquote><div class="side2"></div></figure>
+          <figure class="qb"><blockquote class="face"><q>{q.quote}</q><small>{q.name}<br>{q.org}</small></blockquote><div class="side2"></div></figure>
         ))}
       </div>
     </div>
@@ -163,9 +160,9 @@ const days = [
   <section class="work" aria-label="Client stories">
     <div class="wrap">
       <div class="tiles">
-        {CASES.map((c) => (
-          <a class={`tile ${c.cls}`} href={`/work/${c.slug}/`}>
-            <img class={`shot ${c.imgCls ?? ''}`} src={c.img} alt={c.alt} loading="lazy">
+        {CASES.map((c, i) => (
+          <a class={`tile ${TILE_CLASSES[i % TILE_CLASSES.length]}`} href={`/work/${c.slug}/`}>
+            <img class={`shot ${c.fit ? 'fit' : ''}`} src={c.img} alt={c.alt} loading="lazy" style={c.colour ? `background:${c.colour}` : undefined}>
             <b>{c.name}</b><span class="tags">{c.tags.map((t) => <span>{t}</span>)}</span>
           </a>
         ))}
@@ -180,7 +177,7 @@ const days = [
     </div>
     <div class="reel-rail" id="reelrail">
       {REELS.map((r, i) => (
-        <figure class="rc"><video src={`/media/reels/${r.file}.mp4`} poster={`/media/reels/${r.file}.jpg`} autoplay={i < 5} loop muted playsinline preload={i < 5 ? 'metadata' : 'none'} data-lazy-play={i >= 5 ? '' : undefined} aria-label={`Reel: ${r.label}`}></video></figure>
+        <figure class="rc"><video src={r.video} poster={`${r.poster}?w=520&auto=format`} autoplay={i < 5} loop muted playsinline preload={i < 5 ? 'metadata' : 'none'} data-lazy-play={i >= 5 ? '' : undefined} aria-label={`Reel: ${r.label}`}></video></figure>
       ))}
     </div>
     <div class="reel-nav">

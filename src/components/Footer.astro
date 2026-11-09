@@ -1,5 +1,6 @@
 ---
-import { SITE } from '../data/site';
+import { getContent } from '../lib/content';
+const { settings: SITE } = await getContent();
 const arrow = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"></path></svg>';
 const needs = ['Branding or a rebrand', 'Social media', 'Photo & video', 'A new website', 'How we talk about ourselves', 'An outside view', 'Content for events', 'Not sure yet'];
 const whens = ['As soon as possible', 'In the next few months', 'Later this year', 'Just exploring'];

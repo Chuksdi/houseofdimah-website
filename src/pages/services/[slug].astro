@@ -1,12 +1,15 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { SITE, SERVICES } from '../../data/site';
+import { SITE } from '../../data/site';
+import { getContent } from '../../lib/content';
 
-export function getStaticPaths() {
-  return SERVICES.map((s) => ({ params: { slug: s.slug }, props: { s } }));
+export async function getStaticPaths() {
+  const { services } = await getContent();
+  return services.map((s) => ({ params: { slug: s.slug }, props: { s } }));
 }
 const { s } = Astro.props;
-const others = SERVICES.filter((o) => o.slug !== s.slug);
+const { services, settings } = await getContent();
+const others = services.filter((o) => o.slug !== s.slug);
 const title = `${s.name} | London, Hampshire, Dorset`;
 const description = `${s.body.split('. ')[0]}. ${s.name} from House of Dimah, for businesses across London, Hampshire and Dorset.`;
 const serviceSchema = {
@@ -17,7 +20,7 @@ const serviceSchema = {
   description: s.body,
   url: `${SITE.url}/services/${s.slug}/`,
   provider: { '@id': `${SITE.url}/#org` },
-  areaServed: SITE.areas.map((a) => ({ '@type': 'AdministrativeArea', name: a })),
+  areaServed: settings.areas.map((a) => ({ '@type': 'AdministrativeArea', name: a })),
 };
 ---
 <Base title={title} description={description} schema={[serviceSchema]} breadcrumbs={[{ name: 'Services', path: '/#services' }, { name: s.name, path: `/services/${s.slug}/` }]}>
