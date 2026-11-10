@@ -38,3 +38,15 @@ Locally the audit flags two items: "canonical points at this host" and "sitemap 
 - [ ] Add the Instagram and LinkedIn URLs.
 - [ ] Get Matt Dunphy's OK on his quote, and confirm the BCA figures.
 - [ ] Deploy: GitHub, then Netlify, then the domain. Run the audit against the live URL, and again a month after launch.
+
+
+## Side-by-side preview (Sanity Presentation tab)
+
+- The Studio's **Preview** tab shows https://studio-preview--houseofdimah.netlify.app, a copy of the site built from the
+  `studio-preview` branch with `PREVIEW_MODE=true`. It renders each page on request, so drafts show as you type.
+- Drafts only show to a browser the Studio let in (`/api/draft-mode/enable/` checks Sanity's one-time secret, then sets a
+  private cookie). Anyone else sees published content. The preview is always noindex.
+- Netlify env (branch-deploy context, never in the repo): `SANITY_READ_TOKEN` (Sanity Viewer token "Website preview",
+  saved with `scripts/save-preview-token.sh`) and `PREVIEW_COOKIE_SECRET` (random).
+- `git push` in this repo pushes main to BOTH `main` and `studio-preview` (remote.origin.push), so the preview never drifts.
+- The live site (main) is untouched: still fully static, built once per publish.

@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import { SITE } from '../data/site';
 import { getContent, TILE_CLASSES } from '../lib/content';
 
-const { settings, services: SERVICES, cases: CASES, reels: REELS, quotes } = await getContent();
+const { settings, services: SERVICES, cases: CASES, reels: REELS, quotes } = await getContent(Astro.locals);
 
 const title = 'Branding & Social Media Marketing | London, Hampshire, Dorset';
 const description = 'One team for your branding, content and social media marketing, every month. House of Dimah works with businesses across London, Hampshire and Dorset.';

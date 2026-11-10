@@ -1,0 +1,15 @@
+---
+// Preview site only, and only for a browser let in by the Studio:
+// click-to-edit outlines, and a reload whenever a draft changes.
+---
+<script>
+  import { enableVisualEditing } from '@sanity/visual-editing';
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  enableVisualEditing({
+    refresh: () =>
+      new Promise<void>((resolve) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => { window.location.reload(); resolve(); }, 400);
+      }),
+  });
+</script>

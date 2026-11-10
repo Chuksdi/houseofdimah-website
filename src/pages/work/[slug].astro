@@ -4,9 +4,12 @@ import { getContent } from '../../lib/content';
 
 export async function getStaticPaths() {
   const { cases } = await getContent();
-  return cases.map((c) => ({ params: { slug: c.slug }, props: { c } }));
+  return cases.map((c) => ({ params: { slug: c.slug } }));
 }
-const { c } = Astro.props;
+const { cases } = await getContent(Astro.locals);
+// look the story up per request too, so the preview site (rendered on demand) works
+const c = cases.find((o) => o.slug === Astro.params.slug);
+if (!c) return Astro.rewrite('/404/');
 const title = `${c.name}: client story | House of Dimah`;
 const description = `How House of Dimah worked with ${c.name}: ${c.tags.join(' and ').toLowerCase()}.`;
 ---

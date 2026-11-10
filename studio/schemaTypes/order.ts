@@ -6,4 +6,4 @@ export const orderField = defineField({
   description: 'Lower numbers show first (1, 2, 3...).',
   validation: (r) => r.required().integer().min(0),
 });
-export const byOrder = [{ title: 'Order on the page', name: 'orderAsc', by: [{ field: 'order', direction: 'asc' }] }];
+export const byOrder = [{ title: 'Order on the page', name: 'orderAsc', by: [{ field: 'order', direction: 'asc' as const }] }];

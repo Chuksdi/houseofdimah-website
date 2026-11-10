@@ -16,3 +16,12 @@
   for = "/*"
   [headers.values]
     X-Robots-Tag = "noindex"
+
+# PREVIEW SITE: the studio-preview branch builds a draft-showing copy for the Studio's
+# Presentation tab (https://studio-preview--houseofdimah.netlify.app). It is always noindex.
+# Its secrets (SANITY_READ_TOKEN, PREVIEW_COOKIE_SECRET) live in Netlify env, never in this repo.
+# Keep it in step with main: `git push` here pushes main to both branches (see README).
+[context.studio-preview]
+  command = "npm run build"
+  [context.studio-preview.environment]
+    PREVIEW_MODE = "true"

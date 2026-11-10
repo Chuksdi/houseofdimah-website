@@ -5,10 +5,12 @@ import { getContent } from '../../lib/content';
 
 export async function getStaticPaths() {
   const { services } = await getContent();
-  return services.map((s) => ({ params: { slug: s.slug }, props: { s } }));
+  return services.map((s) => ({ params: { slug: s.slug } }));
 }
-const { s } = Astro.props;
-const { services, settings } = await getContent();
+const { services, settings } = await getContent(Astro.locals);
+// look the service up per request too, so the preview site (rendered on demand) works
+const s = services.find((o) => o.slug === Astro.params.slug);
+if (!s) return Astro.rewrite('/404/');
 const others = services.filter((o) => o.slug !== s.slug);
 const title = `${s.name} | London, Hampshire, Dorset`;
 const description = `${s.body.split('. ')[0]}. ${s.name} from House of Dimah, for businesses across London, Hampshire and Dorset.`;
