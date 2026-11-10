@@ -249,7 +249,7 @@ html[data-mode="light"] .page .hero .mark .vl{display:block}
 .icard ol{margin:0;padding-left:20px;display:grid;gap:8px;color:rgba(246,250,254,.68)}
 @media (max-width:640px){.fields{grid-template-columns:minmax(0,1fr)}}
 .page .foot a.btn{color:#0B0B0B}
-.foot .three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;padding-top:44px;padding-bottom:110px;border-bottom:1px solid rgba(246,250,254,.14)}
+.foot .three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;max-width:1040px;padding-left:0;padding-right:0;padding-top:44px;padding-bottom:110px;border-bottom:1px solid rgba(246,250,254,.14)}
 .foot h3{font-size:22px;color:#F6FAFE;margin-bottom:6px}
 .foot .three p{font-size:14px;max-width:30ch}
 .foot .bottom{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:28px;padding-top:40px;padding-bottom:36px}
@@ -379,3 +379,5 @@ html.js .idone.cur{display:grid}
 .tile:hover b,.tile:focus-visible b{background-size:100% 2px}
 .tile:focus-visible{outline:2px solid var(--fg);outline-offset:6px;border-radius:6px}
 @media (prefers-reduced-motion:reduce){.tile,.tile .shot,.tile b,.hod-cursor-zone.cursor-on .badge{transition:none}}
+/* footer form and columns keep the usual side margin once the screen is narrower than their 1040px width */
+@media (max-width:1180px){.foot .intake,.foot .three{padding-left:clamp(20px,4vw,72px);padding-right:clamp(20px,4vw,72px)}}
