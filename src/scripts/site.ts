@@ -100,3 +100,38 @@ if (form) {
     }
   });
 }
+
+// Client stories: the spinning badge follows the mouse, eased in and out (slow, fast, slow).
+// Mouse and trackpad only; touch screens keep the still badge.
+{
+  const zone = document.querySelector<HTMLElement>('.hod-cursor-zone');
+  const box = zone?.querySelector<HTMLElement>('.tiles');
+  const badge = box?.querySelector<HTMLElement>('.badge');
+  if (zone && box && badge && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    zone.classList.add('cursor-on');
+    let x = 0, y = 0, tx = 0, ty = 0, vx = 0, vy = 0, inside = false, raf = 0;
+    let last: { x: number; y: number } | null = null;
+    const tick = () => {
+      vx = (vx + (tx - x) * 0.08) * 0.74; vy = (vy + (ty - y) * 0.08) * 0.74;
+      x += vx; y += vy;
+      badge.style.setProperty('--cx', x + 'px'); badge.style.setProperty('--cy', y + 'px');
+      raf = Math.abs(tx - x) + Math.abs(ty - y) + Math.abs(vx) + Math.abs(vy) > 0.2 ? requestAnimationFrame(tick) : 0;
+    };
+    const update = (target: EventTarget | null) => {
+      if (!last) return;
+      const z = zone.getBoundingClientRect(), b = box.getBoundingClientRect();
+      const now = last.x >= z.left && last.x <= z.right && last.y >= z.top && last.y <= z.bottom;
+      tx = last.x - b.left; ty = last.y - b.top;
+      if (now && !inside) { x = tx; y = ty; vx = vy = 0; }
+      if (now !== inside) { inside = now; zone.classList.toggle('cursor-in', now); }
+      const el = (target as Element | null) ?? document.elementFromPoint(last.x, last.y);
+      zone.classList.toggle('cursor-tile', now && !!el?.closest?.('.hod-cursor-zone .tile'));
+      if (!raf) raf = requestAnimationFrame(tick);
+    };
+    document.addEventListener('pointermove', (e) => {
+      if (e.pointerType !== 'mouse') return;
+      last = { x: e.clientX, y: e.clientY }; update(e.target);
+    }, { passive: true });
+    window.addEventListener('scroll', () => update(null), { passive: true });
+  }
+}
