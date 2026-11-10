@@ -136,9 +136,6 @@ html[data-mode="light"] .page .hero .mark .vl{display:block}
 .rail span{display:grid;place-items:center;height:52px;border:1.5px solid var(--rule);border-radius:4px;font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--mute)}
 .rail span:nth-child(2){margin-left:14px;margin-right:-14px}
 .rail span:nth-child(4){margin-left:8px;margin-right:-8px}
-.film{overflow:hidden;border-radius:4px}
-.film .strip{display:flex;flex-direction:column;gap:10px}
-.film .strip .ph{height:84px;border-radius:4px}
 
 /* lesson 02: deliverables */
 .del{padding:clamp(80px,9vw,140px) 0;display:grid;gap:40px}
@@ -260,8 +257,6 @@ html[data-mode="light"] .page .hero .mark .vl{display:block}
 @keyframes rise{from{opacity:0;transform:translateY(24px)}}
 .step .ph{animation:wipe linear both;animation-timeline:view();animation-range:entry 10% entry 70%;animation-timing-function:var(--ramp)}
 @keyframes wipe{from{clip-path:inset(0 100% 0 0);transform:scale(1.1)}to{clip-path:inset(0);transform:none}}
-.film .strip{animation:run linear both;animation-timeline:--method;animation-range:contain 0% contain 100%}
-@keyframes run{from{transform:translateY(0)}to{transform:translateY(-58%)}}
 .rail span{animation:lit linear none;animation-range:cover 35% cover 65%}
 .rail span:nth-child(1){animation-timeline:--s1}
 .rail span:nth-child(2){animation-timeline:--s2}

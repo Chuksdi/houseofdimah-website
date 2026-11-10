@@ -37,7 +37,6 @@ const steps = [
   { n: '04', h: 'Publish', p: 'Posted on schedule, on brand, across the channels<br>that matter to you.', eg: 'Social, site, print', ph: ['b', 'It goes live', 'post, launch, campaign'], mw: '64ch' },
   { n: '05', h: 'Learn', p: 'A regular review of what worked, and how the plan moves with it.', eg: 'e.g. review, next steps', ph: ['a', 'The review', "what worked, what's next"] },
 ];
-const film = 'c a b c a b c a b c a b a c b a c b'.split(' ');
 const days = [
   ['Day 1', 'Welcome', 'Agreement signed, a direct line to the team, access to your accounts.'],
   ['Week 1', 'Discovery', 'We interview you and your team and walk your business.'],
@@ -127,7 +126,6 @@ const days = [
         <div class="stick">
           <p class="label">The House Method</p>
           <div class="rail">{steps.map((s) => <span>{s.n}</span>)}</div>
-          <div class="film"><div class="strip">{film.map((c) => <div class={`ph ${c}`}></div>)}</div></div>
         </div>
       </aside>
     </div>
