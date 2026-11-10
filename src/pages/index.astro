@@ -62,8 +62,8 @@ const days = [
 
   <section class="statement">
     <div class="wrap">
-      <p class="do-h" style="margin-top:0;max-width:46ch">We replace fragmented services and<br>constant oversight with one aligned team.<br>Crafting your story, building your presence,<br>and driving engagement across<br>every touchpoint.</p>
-      <a class="btn" href="#start" style="gap:6px">Let&rsquo;s tell your story<Fragment set:html={arrowUp} /></a>
+      <p class="do-h" style="margin-top:0;max-width:46ch">We replace fragmented vendors<br>and take full ownership of your marketing.<br>Crafting your story, building your presence,<br>and driving engagement across<br>every touchpoint.</p>
+      <a class="btn" href="#start" style="gap:6px">Work with us<Fragment set:html={arrowUp} /></a>
     </div>
   </section>
 
@@ -76,7 +76,7 @@ const days = [
       <div class="svc-grid">
         {SERVICES.map((s, i) => (
           <button class="svc-tile" type="button" aria-expanded="false" aria-controls={`svc-${i}`} data-svc={i}>
-            <b>{s.name}</b><span><span data-cta>What it covers</span> <Fragment set:html={arrowUp} /></span>
+            <i class="ph" style={`background-image:url(/media/services/${s.slug}.jpg)`} aria-hidden="true"></i><b>{s.name}</b><span><span data-cta>What it covers</span> <Fragment set:html={arrowUp} /></span>
           </button>
         ))}
       </div>
@@ -158,6 +158,10 @@ const days = [
   <section class="work" aria-label="Client stories">
     <div class="wrap">
       <div class="tiles">
+        <div class="badge" aria-hidden="true">
+          <svg viewBox="0 0 240 240"><defs><path id="orbit-path" d="M120,120 m-104,0 a104,104 0 1,1 208,0 a104,104 0 1,1 -208,0"></path></defs><text><textPath href="#orbit-path" textLength="650" lengthAdjust="spacing">BRAND • CONTENT • EXECUTION • BRAND • CONTENT • EXECUTION •</textPath></text></svg>
+          <div class="core"><video src="/media/logo-colour-panels.mp4" poster="/media/logo-colour-panels.jpg" autoplay loop muted playsinline preload="metadata"></video></div>
+        </div>
         {CASES.map((c, i) => (
           <a class={`tile ${TILE_CLASSES[i % TILE_CLASSES.length]}`} href={`/work/${c.slug}/`}>
             <img class={`shot ${c.fit ? 'fit' : ''}`} src={c.img} alt={c.alt} loading="lazy" style={c.colour ? `background:${c.colour}` : undefined}>
