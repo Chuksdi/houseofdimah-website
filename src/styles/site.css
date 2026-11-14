@@ -409,10 +409,15 @@ html:not([data-mode="light"]) .page .hero{background:#FFFFFF}
 .foot .lm-cover img{display:block;width:100%;height:auto}
 .foot .lm .h3{font-family:var(--display);font-weight:800;font-size:26px;line-height:1.05;letter-spacing:-.02em;color:#F6FAFE;margin:0}
 .foot .lm p{font-size:15px;line-height:1.5;color:rgba(246,250,254,.68);margin:0}
-.foot .lm-link{justify-self:start;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding-bottom:2px;font:700 12.5px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 calc(100% - 10px)/100% 1.5px no-repeat}
+.foot .lm-link{justify-self:start;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding-bottom:2px;font:700 12.5px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;text-decoration:none;background:linear-gradient(#FF5B23,#FF5B23) 0 calc(100% - 10px)/100% 2px no-repeat}
 .foot a.lm-link{color:#F6FAFE}
 .foot .lm-link svg{width:16px;height:16px;transition:transform .6s var(--ramp)}
 .foot .lm-link:hover svg{transform:translateX(4px)}
+/* hover: the orange underline wipes off to the right, then draws back in from the left */
+@keyframes lmline{0%{background-size:100% 2px;background-position:100% calc(100% - 10px)}50%{background-size:0 2px;background-position:100% calc(100% - 10px)}50.01%{background-size:0 2px;background-position:0 calc(100% - 10px)}100%{background-size:100% 2px;background-position:0 calc(100% - 10px)}}
+.foot .lm-link:hover,.foot .lm-link:focus-visible{animation:lmline .9s var(--ramp)}
+@media (prefers-reduced-motion:reduce){.foot .lm-link:hover,.foot .lm-link:focus-visible{animation:none}}
+
 .foot .lm-link:focus-visible{outline:2px solid #F6FAFE;outline-offset:4px;border-radius:2px}
 .foot .lm small{font-size:12.5px;color:rgba(246,250,254,.55)}
 .foot .lm.mail{min-height:195px;align-content:center}
