@@ -31,11 +31,11 @@ const website = { '@context': 'https://schema.org', '@type': 'WebSite', name: SI
 
 const sectors = 'Our experience spans education, sports nutrition, finance and healthcare.'.split(' ');
 const steps = [
-  { n: '01', h: 'Understand', p: 'We learn your business, people and customers, so we can speak for you.', eg: 'e.g. interviews, audit, research', ph: ['a', 'Workshop with the founder', 'whiteboard, sticky notes'] },
-  { n: '02', h: 'Plan', p: 'A plan built around your story and sized to what you need:<br>what to say, where, and what it should achieve.', eg: 'e.g. story, content calendar, launch plan', ph: ['b', 'The quarter on one wall', 'plan, calendar, priorities'], mw: '64ch' },
-  { n: '03', h: 'Create', p: "We write, design, shoot and edit. You're part of it where it helps,<br>and nothing goes out without your yes.", eg: 'e.g. identity, shoots, site build', ph: ['c', 'Behind the scenes', 'shoot day, design on screen'], mw: '72ch' },
-  { n: '04', h: 'Publish', p: 'Posted on schedule, on brand, across the channels<br>that matter to you.', eg: 'Social, site, print', ph: ['b', 'It goes live', 'post, launch, campaign'], mw: '64ch' },
-  { n: '05', h: 'Learn', p: 'A regular review of what worked, and how the plan moves with it.', eg: 'e.g. review, next steps', ph: ['a', 'The review', "what worked, what's next"] },
+  { n: '01', h: 'Understand', p: 'We learn your business, people and customers, so we can speak for you.', eg: 'e.g. interviews, audit, research', ph: ['a', 'Workshop with the founder', 'whiteboard, sticky notes'], alt: 'Two people across a café table, hands round their coffee cups, mid-conversation' },
+  { n: '02', h: 'Plan', p: 'A plan built around your story and sized to what you need:<br>what to say, where, and what it should achieve.', eg: 'e.g. story, content calendar, launch plan', ph: ['b', 'The quarter on one wall', 'plan, calendar, priorities'], mw: '64ch', alt: 'A woman planning at a whiteboard of colour-coded sticky notes' },
+  { n: '03', h: 'Create', p: "We write, design, shoot and edit. You're part of it where it helps,<br>and nothing goes out without your yes.", eg: 'e.g. identity, shoots, site build', ph: ['c', 'Behind the scenes', 'shoot day, design on screen'], mw: '72ch', alt: 'A videographer filming a client as she talks through her product, in a bright studio' },
+  { n: '04', h: 'Publish', p: 'Posted on schedule, on brand, across the channels<br>that matter to you.', eg: 'Social, site, print', ph: ['b', 'It goes live', 'post, launch, campaign'], mw: '64ch', alt: 'A phone of social media apps on a wooden table beside a coffee' },
+  { n: '05', h: 'Learn', p: 'A regular review of what worked, and how the plan moves with it.', eg: 'e.g. review, next steps', ph: ['a', 'The review', "what worked, what's next"], alt: 'A team gathered round a table, reviewing printed work together' },
 ];
 const days = [
   ['Day 1', 'Welcome', 'Agreement signed, a direct line to the team, access to your accounts.'],
@@ -49,8 +49,8 @@ const days = [
   <section class="hero" slot="hero">
     <div class="giant" aria-hidden="true">House of Dimah</div>
     <div class="mark">
-      <img class="vd" src="/media/logo-build-dark.webp" alt="House of Dimah logo: the house builds itself, block by block" width="420" height="280" fetchpriority="high">
-      <img class="vl" src="/media/logo-build-light.webp" alt="" width="420" height="280" aria-hidden="true">
+      <video class="vd" src="/media/logo-panels-on-white.mp4" poster="/media/logo-panels-on-white.jpg" autoplay loop muted playsinline preload="auto" width="840" height="560" aria-label="House of Dimah logo: the house builds itself, block by block, in blue, orange and violet panels"></video>
+      <video class="vl" src="/media/logo-panels-on-black.mp4" poster="/media/logo-panels-on-black.jpg" autoplay loop muted playsinline preload="auto" width="840" height="560" aria-hidden="true"></video>
     </div>
     <div>
       <h1>Agency expertise. In-house commitment.</h1>
@@ -75,19 +75,34 @@ const days = [
       </div>
       <div class="svc-grid">
         {SERVICES.map((s, i) => (
-          <button class="svc-tile" type="button" aria-expanded="false" aria-controls={`svc-${i}`} data-svc={i}>
-            <i class="ph" style={`background-image:url(/media/services/${s.slug}.jpg)`} aria-hidden="true"></i><b>{s.name}</b><span><span data-cta>What it covers</span> <Fragment set:html={arrowUp} /></span>
-          </button>
+          <>
+            <button class="svc-tile" type="button" aria-expanded="false" aria-controls={`svc-${i}`} data-svc={i}>
+              <i class="ph" style={`background-image:url(/media/services/${s.slug}.jpg)`} aria-hidden="true"></i><b>{s.name}</b><span><span data-cta>What it covers</span> <Fragment set:html={arrowUp} /></span>
+            </button>
+            <div class="svc-pop" id={`svc-${i}`} role="region" aria-label={s.name} hidden>
+              <button class="svc-close" type="button" aria-label="Close" data-svc-close><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"></path></svg></button>
+              <h3>{s.name}</h3>
+              <p>{s.body}</p>
+              <div class="svc-chips">{s.tags.map((t) => <span>{t}</span>)}</div>
+              <a class="svc-more" href={`/services/${s.slug}/`}>More about {s.name.toLowerCase()} <Fragment set:html={arrowUp} /></a>
+            </div>
+          </>
         ))}
       </div>
-      {SERVICES.map((s, i) => (
-        <div class="svc-pop" id={`svc-${i}`} role="region" aria-label={s.name} hidden>
-          <button class="svc-close" type="button" aria-label="Close" data-svc-close><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"></path></svg></button>
-          <h3>{s.name}</h3>
-          <p>{s.body}</p>
-          <div class="svc-chips">{s.tags.map((t) => <span>{t}</span>)}</div>
-          <a class="svc-more" href={`/services/${s.slug}/`}>More about {s.name.toLowerCase()} <Fragment set:html={arrowUp} /></a>
-        </div>
+    </div>
+  </section>
+
+  <section class="reels" aria-labelledby="reels-h">
+    <div class="wrap reels-head">
+      <h2 id="reels-h">Made to stop the scroll.</h2>
+      <p>Your complete content engine - reels and video scripted, filmed, edited, posted, and then measured.</p>
+    </div>
+    <div class="reel-rail" id="reelrail">
+      {REELS.map((r, i) => (
+        <figure class="rc"><video src={r.video} poster={`${r.poster}?w=520&auto=format`} autoplay={i < 5} loop muted playsinline preload={i < 5 ? 'metadata' : 'none'} data-lazy-play={i >= 5 ? '' : undefined} aria-label={`Reel: ${r.label}`}></video></figure>
+      ))}
+      {REELS.map((r) => (
+        <figure class="rc clone" aria-hidden="true"><video src={r.video} poster={`${r.poster}?w=520&auto=format`} loop muted playsinline preload="none" data-lazy-play tabindex="-1"></video></figure>
       ))}
     </div>
   </section>
@@ -112,7 +127,7 @@ const days = [
       <div class="steps">
         {steps.map((s) => (
           <div class="step">
-            <div class={`ph ${s.ph[0]}`}><span>{s.ph[1]}<br>{s.ph[2]}</span></div>
+            <div class={`ph ${s.ph[0]} photo`}><img src={`/media/method/step-${s.n}.jpg`} alt={s.alt} loading="lazy" width="1000" height="1500"></div>
             <div class="txt"><div class="stick" style={s.mw ? `max-width:${s.mw}` : undefined}>
               <span class="num">{s.n}</span>
               <h3>{s.h}</h3>
@@ -169,22 +184,6 @@ const days = [
           </a>
         ))}
       </div>
-    </div>
-  </section>
-
-  <section class="reels" aria-labelledby="reels-h">
-    <div class="wrap reels-head">
-      <h2 id="reels-h">Made to stop the scroll.</h2>
-      <p>Your complete content engine - reels and video scripted, filmed, edited, posted, and then measured.</p>
-    </div>
-    <div class="reel-rail" id="reelrail">
-      {REELS.map((r, i) => (
-        <figure class="rc"><video src={r.video} poster={`${r.poster}?w=520&auto=format`} autoplay={i < 5} loop muted playsinline preload={i < 5 ? 'metadata' : 'none'} data-lazy-play={i >= 5 ? '' : undefined} aria-label={`Reel: ${r.label}`}></video></figure>
-      ))}
-    </div>
-    <div class="reel-nav">
-      <button type="button" class="rn" aria-label="Previous reels" data-reel="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></button>
-      <button type="button" class="rn" aria-label="Next reels" data-reel="1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button>
     </div>
   </section>
 

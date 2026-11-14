@@ -7,7 +7,8 @@ const whens = ['As soon as possible', 'In the next few months', 'Later this year
 const budgets = ['A one-off project', 'Monthly support', 'Both', 'Not sure yet'];
 ---
 <footer class="foot" id="contact">
-  <div class="wrap cta-band intake" id="start">
+  <div class="wrap intake-row">
+  <div class="cta-band intake" id="start">
     <div class="isteps" aria-hidden="true"><span class="on"></span><span></span><span></span></div>
 
     <!-- Netlify Forms: the form is plain HTML, so it works and is detected at build time -->
@@ -24,8 +25,7 @@ const budgets = ['A one-off project', 'Monthly support', 'Both', 'Not sure yet']
           {needs.map((n) => <label class="chip"><input type="checkbox" name="needs" value={n}><span>{n}</span></label>)}
         </div>
         <div class="field wide"><label for="story">In a sentence or two, what's happening?</label><textarea id="story" name="story" placeholder="We've just opened a second site and our Instagram doesn't reflect who we are any more."></textarea></div>
-        <div class="inav"><span class="ialt">Takes about a minute.</span><button class="btn" type="button" data-next>Next <Fragment set:html={arrow} /></button></div>
-        <p class="ialt">Rather just email? <a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+        <div class="inav"><button class="btn" type="button" data-next>Next <Fragment set:html={arrow} /></button><span class="ialt">Takes about a minute.</span></div>
       </fieldset>
 
       <fieldset class="istep" data-step="2">
@@ -66,6 +66,19 @@ const budgets = ['A one-off project', 'Monthly support', 'Both', 'Not sure yet']
       </div>
     </div>
   </div>
+  <div class="lm-col">
+    <aside class="lm" aria-labelledby="lm-h">
+      <a class="lm-cover" href="/brand-check/" tabindex="-1" aria-hidden="true"><img src="/media/brand-check-cover.jpg" alt="" width="480" height="679" loading="lazy"></a>
+      <h2 class="h3" id="lm-h">Not ready to talk yet?</h2>
+      <p>Take our free Brand Check. Ten questions that show where your brand is losing people, and what to fix first. You get your score straight away.</p>
+      <a class="lm-link" href="/brand-check/">Take the Brand Check <Fragment set:html={arrow} /></a>
+      <small>About ten minutes. Ends with a free bespoke audit, if you'd like one.</small>
+    </aside>
+    <aside class="lm mail" aria-label="Email us">
+      <div class="acts"><a class="btn ghost" href={`mailto:${SITE.email}`}>Email us</a><a class="btn" href={`mailto:${SITE.email}?subject=Book%20a%20call`}>Book a call</a></div>
+    </aside>
+  </div>
+  </div>
 
   <div class="wrap three">
     <div><h2 class="h3">Brand</h2><p>Story, identity and guidelines your team can use.</p></div>
@@ -81,5 +94,5 @@ const budgets = ['A one-off project', 'Monthly support', 'Both', 'Not sure yet']
       {(SITE.instagram || SITE.linkedin) && <span>{SITE.instagram && <a href={SITE.instagram}>Instagram</a>}{SITE.instagram && SITE.linkedin && ' · '}{SITE.linkedin && <a href={SITE.linkedin}>LinkedIn</a>}</span>}
     </div>
   </div>
-  <div class="fine"><span>© 2026 House of Dimah</span><span>No long contracts. You stay because it works.</span></div>
+  <div class="fine"><span>© 2026 House of Dimah</span><span>You stay because it works.</span></div>
 </footer>

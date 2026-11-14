@@ -54,11 +54,35 @@ tiles.forEach((t) => t.addEventListener('click', () => {
 }));
 $$('[data-svc-close]').forEach((b) => b.addEventListener('click', closeAll));
 
-// reels: arrows, and only play the later ones once they're on screen
+// reels: the rail drifts right to left on its own, stops while the mouse is on it (or for 3s after a swipe),
+// and loops seamlessly onto the copies at the end. The later reels only play once they're on screen.
 const rail = $('#reelrail');
-$$('[data-reel]').forEach((b) => b.addEventListener('click', () => {
-  if (rail) rail.scrollBy({ left: Number(b.dataset.reel) * Math.max(rail.clientWidth * 0.8, 260), behavior: 'smooth' });
-}));
+if (rail && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  rail.classList.add('auto');
+  const SPEED = 38; // px per second
+  let hover = false, seen = true, last = 0, speed = 0, pos = rail.scrollLeft, hold = 0;
+  const loopW = () => { const a = $('.rc', rail), c = $('.rc.clone', rail); return a && c ? c.offsetLeft - a.offsetLeft : 0; };
+  const step = (t: number) => {
+    const dt = last ? Math.min(t - last, 64) / 1000 : 0; last = t;
+    const go = seen && !hover && Date.now() > hold;
+    speed += ((go ? SPEED : 0) - speed) * Math.min(1, dt * 2.5); // eases up to speed and back down to a stop
+    if (speed > 0.5) {
+      pos += speed * dt;
+      const w = loopW(); if (w && pos >= w) pos -= w;
+      rail.scrollLeft = pos;
+    } else pos = rail.scrollLeft; // stopped: follow wherever the visitor scrolled to
+    requestAnimationFrame(step);
+  };
+  rail.addEventListener('pointerenter', (e) => { if ((e as PointerEvent).pointerType === 'mouse') hover = true; });
+  rail.addEventListener('pointerleave', (e) => { if ((e as PointerEvent).pointerType === 'mouse') hover = false; });
+  const holdOn = () => { hold = Date.now() + 3000; };
+  rail.addEventListener('touchstart', holdOn, { passive: true });
+  rail.addEventListener('touchmove', holdOn, { passive: true });
+  if ('IntersectionObserver' in window) new IntersectionObserver((es) => es.forEach((e) => { seen = e.isIntersecting; })).observe(rail);
+  requestAnimationFrame(step);
+}
+// hero logo: make sure the visible version plays (autoplay alone can be skipped)
+$$<HTMLVideoElement>('.hero .mark video').forEach((v) => { if (v.offsetParent) { v.muted = true; v.play().catch(() => {}); } });
 const lazy = $$<HTMLVideoElement>('video[data-lazy-play]');
 if ('IntersectionObserver' in window && lazy.length) {
   const io = new IntersectionObserver((es) => es.forEach((e) => {

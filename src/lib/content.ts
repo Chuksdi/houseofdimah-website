@@ -44,7 +44,7 @@ const QUERY = `{
   "settings": *[_id == "siteSettings"][0]{ email, areas, instagram, linkedin },
   "services": *[_type == "service"] | order(order asc){ "slug": slug.current, name, body, tags },
   "cases": *[_type == "caseStudy"] | order(order asc){ "slug": slug.current, name, tags, "img": image.asset->url, "alt": image.alt, "fit": coalesce(logoOnColour, false), "colour": tileColour, summary },
-  "reels": *[_type == "reel"] | order(order asc){ label, "video": video.asset->url, "poster": poster.asset->url },
+  "reels": *[_type == "reel" && hidden != true] | order(order asc){ label, "video": video.asset->url, "poster": poster.asset->url },
   "quotes": *[_type == "testimonial"] | order(order asc){ quote, name, org }
 }`;
 
