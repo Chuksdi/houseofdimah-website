@@ -17,18 +17,18 @@ const Q: { area: keyof typeof AREAS; q: string; hint: string; fix: string }[] = 
   { area: 'brand', q: "Can a new customer see proof that you're good within ten seconds?", hint: 'Reviews, testimonials, names of clients, before and after. Somewhere they will actually see it.', fix: 'Put your three best reviews on your homepage and pin one on Instagram.' },
   { area: 'content', q: "Do you know what you're posting next month, and why?", hint: 'A plan tied to what the business needs (a launch, a quiet season, a new service), and a way to see what worked.', fix: 'Start each month with one goal, and check at the end what moved it.' },
 ];
-const title = 'Free Brand Check | House of Dimah';
-const description = 'Ten questions that show where your brand is losing people, and what to fix first. Free, about ten minutes, with your score straight away.';
+const title = 'Free Dimah Brand Check | House of Dimah';
+const description = 'Ten questions that show where your brand is losing people, and what to fix first. Free, about five minutes, with your score straight away.';
 ---
 <Base title={title} description={description} breadcrumbs={[{ name: 'Brand Check', path: '/brand-check/' }]}>
   <article class="bc">
     <section class="wrap intro">
       <div>
-        <h1>The Brand Check</h1>
+        <h1>The Dimah Brand Check</h1>
         <p class="lede">Ten questions that show where your brand is losing people, and what to fix first.</p>
-        <p class="meta"><span>About ten minutes</span><span>Your score straight away</span><span><i class="d story"></i>Story</span><span><i class="d brand"></i>Brand</span><span><i class="d content"></i>Content</span></p>
+        <p class="meta"><span>About five minutes</span><span>Your score straight away</span><span><i class="d story"></i>Story</span><span><i class="d brand"></i>Brand</span><span><i class="d content"></i>Content</span></p>
       </div>
-      <a class="cover" href="/media/house-of-dimah-brand-check.pdf" target="_blank" rel="noopener"><img src="/media/brand-check-cover.jpg" alt="Cover of the printable Brand Check guide" width="480" height="679"></a>
+      <a class="cover" href="/media/house-of-dimah-brand-check.pdf" target="_blank" rel="noopener"><img src="/media/brand-check-cover.jpg" alt="Cover of the printable Dimah Brand Check guide" width="480" height="679"></a>
     </section>
 
     <div class="prog"><div class="wrap"><div class="bar"><span id="bc-bar"></span></div><small id="bc-count">0 of 10 answered</small></div></div>
@@ -71,9 +71,9 @@ const description = 'Ten questions that show where your brand is losing people, 
     <section class="wrap audit" id="audit">
       <div>
         <h2 class="ah">Want a bespoke audit?</h2>
-        <p class="lead">The Brand Check shows the shape of it. A bespoke audit shows the detail. We go through your brand ourselves and send back what we'd change first.</p>
+        <p class="lead">The Dimah Brand Check gives you the big picture. A bespoke audit shows the detail. We go through your brand ourselves and send back what we'd change first.</p>
         <ul>
-          <li>We look at your website, social media and printed pieces</li>
+          <li>We look at your story, brand identity, website and social channels</li>
           <li>A short written audit, specific to your business</li>
           <li>The three changes that would make the biggest difference</li>
           <li>Free, with an optional call to talk it through</li>
@@ -85,7 +85,7 @@ const description = 'Ten questions that show where your brand is losing people, 
         <input type="hidden" name="score" id="bc-f-score" value="">
         <input type="hidden" name="answers" id="bc-f-answers" value="">
         <p hidden><label>Leave this empty <input name="bot-field"></label></p>
-        <div class="scorechip"><span>Your Brand Check score</span><b id="bc-chip">Not taken yet</b></div>
+        <div class="scorechip"><span>Your Dimah Brand Check score</span><b id="bc-chip">Not taken yet</b></div>
         <div class="two">
           <div class="field"><label for="ba-name">Your name</label><input id="ba-name" name="name" type="text" autocomplete="name" required></div>
           <div class="field"><label for="ba-biz">Business</label><input id="ba-biz" name="business" type="text" autocomplete="organization" required></div>
