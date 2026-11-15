@@ -53,7 +53,7 @@ const days = [
       <video class="vl" src="/media/logo-panels-on-black.mp4" poster="/media/logo-panels-on-black.jpg" autoplay loop muted playsinline preload="auto" width="840" height="560" aria-hidden="true"></video>
     </div>
     <div>
-      <h1>Agency expertise. In-house commitment.</h1>
+      <h1>Agency expertise.<br>In-house commitment.</h1>
       <p class="sub">Branding, content and social media marketing, run by one team every month.</p>
       <div class="hero-acts"><a class="btn" href="#start">Start here</a></div>
       <ul class="loc">{settings.areas.map((a) => <li>{a}</li>)}</ul>
@@ -128,7 +128,7 @@ const days = [
       <div class="steps">
         {steps.map((s) => (
           <div class="step">
-            <div class={`ph ${s.ph[0]} photo`}><img src={`/media/method/step-${s.n}.jpg`} alt={s.alt} loading="lazy" width="1000" height="1500"></div>
+            <div class={`ph ${s.ph[0]} photo`}><img src={`/media/method/step-${s.n}-v2.jpg`} alt={s.alt} loading="lazy" width="1000" height="1500"></div>
             <div class="txt"><div class="stick" style={s.mw ? `max-width:${s.mw}` : undefined}>
               <span class="num" style={`color:${["#8BDAE4","#FF5B23","#788CE3","#8BDAE4","#FF5B23"][Number(s.n) - 1]}`}>{s.n}</span>
               <h3>{s.h}</h3>
@@ -176,7 +176,7 @@ const days = [
       <div class="tiles">
         <div class="badge" aria-hidden="true">
           <svg viewBox="0 0 240 240"><defs><path id="orbit-path" d="M120,120 m-104,0 a104,104 0 1,1 208,0 a104,104 0 1,1 -208,0"></path></defs><text><textPath href="#orbit-path" textLength="650" lengthAdjust="spacing">BRAND • CONTENT • EXECUTION • BRAND • CONTENT • EXECUTION •</textPath></text><text class="alt"><textPath href="#orbit-path" textLength="650" lengthAdjust="spacing">VIEW THE STORY • VIEW THE STORY • VIEW THE STORY •</textPath></text></svg>
-          <div class="core"><video src="/media/logo-colour-panels.mp4" poster="/media/logo-colour-panels.jpg" autoplay loop muted playsinline preload="metadata"></video></div>
+          <div class="core"><video src="/media/logo-colour-panels-v2.mp4" poster="/media/logo-colour-panels-v2.jpg" autoplay loop muted playsinline preload="metadata"></video></div>
         </div>
         {CASES.map((c, i) => (
           <a class={`tile ${TILE_CLASSES[i % TILE_CLASSES.length]}`} href={`/work/${c.slug}/`}>
