@@ -130,7 +130,7 @@ const days = [
           <div class="step">
             <div class={`ph ${s.ph[0]} photo`}><img src={`/media/method/step-${s.n}.jpg`} alt={s.alt} loading="lazy" width="1000" height="1500"></div>
             <div class="txt"><div class="stick" style={s.mw ? `max-width:${s.mw}` : undefined}>
-              <span class="num">{s.n}</span>
+              <span class="num" style={`color:${["#8BDAE4","#FF5B23","#788CE3","#8BDAE4","#FF5B23"][Number(s.n) - 1]}`}>{s.n}</span>
               <h3>{s.h}</h3>
               <p set:html={s.p} />
               <span class="eg">{s.eg}</span>
@@ -147,7 +147,7 @@ const days = [
     </div>
   </section>
 
-  <section class="statement" style="border-top:1px solid var(--rule)">
+  <section class="statement" style="border-top:1px solid var(--rule);padding-bottom:clamp(56px,6.5vw,100px)">
     <div class="wrap">
       <p>{sectors.map((w, i) => <><span class="w" style={`--i:${i}`}>{w}</span>{' '}</>)}</p>
       <small>Different sectors, same way of working: we learn your business first, then tell its story.</small>
@@ -164,7 +164,7 @@ const days = [
     </div>
   </section>
 
-  <section class="statement" id="work" style="border-top:1px solid var(--rule);padding-bottom:clamp(32px,4vw,56px)">
+  <section class="statement" id="work" style="border-top:1px solid var(--rule);padding-top:clamp(68px,8vw,116px);padding-bottom:clamp(32px,4vw,56px)">
     <div class="wrap">
       <h2 class="stmt-h"><span class="w" style="--i:0">Client</span> <span class="w" style="--i:1">stories</span></h2>
       <small>Inside the strategic storytelling and design systems we’ve engineered.</small>
