@@ -1,0 +1,51 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../data/site';
+// DRAFT for Chuks and Kat to review. Terms of use for the website itself (not the terms for client work,
+// which sit in proposals and contracts).
+const L = SITE.legal;
+const title = 'Website terms | House of Dimah';
+const description = 'The terms for using the House of Dimah website.';
+---
+<Base title={title} description={description} breadcrumbs={[{ name: 'Website terms', path: '/terms/' }]}>
+  <article class="inner legal">
+    <div class="wrap">
+      <h1>Website terms</h1>
+      <p class="lede">The ground rules for using this website. By using it, you agree to them. Last updated {L.updated}.</p>
+
+      <h2>Who runs this site</h2>
+      <p>{SITE.url.replace('https://', '')} is run by {L.company}{L.companyNumber && <>, a company registered in England and Wales (company number {L.companyNumber})</>}{L.registeredOffice && <>, registered office {L.registeredOffice}</>}. You can reach us at <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+
+      <h2>What the site is for</h2>
+      <p>The site tells you about our work and services and lets you get in touch. It is general information, not advice for your particular business.</p>
+      <p>Prices on the site are guides ("from" prices). They are not an offer or a quote. What we do for you, what it costs and the terms of the work are set out in a written proposal and agreed before any work starts. Those agreed terms apply to the work, not these website terms.</p>
+
+      <h2>The Dimah Brand Check</h2>
+      <p>The Brand Check is a free self-assessment. Your score, band and suggested fixes are a general guide based on your own answers. They are not a professional audit, and you use them at your own discretion. A bespoke audit, if you ask for one, is free and does not commit you to anything.</p>
+
+      <h2>Our content and our clients' work</h2>
+      <p>Everything on this site, including the words, design, logo, photos and video, belongs to us or is used with permission. The case studies show work we did for our clients. Their names, logos, brands and materials belong to them and appear with their permission.</p>
+      <p>You are welcome to share links to our pages. Please don't copy, reuse or republish our content or our clients' work without asking us first.</p>
+
+      <h2>Using the site</h2>
+      <p>Please don't misuse the site: no attempts to break or overload it, to get into parts of it you are not meant to, or to send spam or harmful content through its forms.</p>
+
+      <h2>Links to other sites</h2>
+      <p>Some links take you to sites we don't run, such as our booking page on Google or our clients' websites. We are not responsible for their content or how they handle your information.</p>
+
+      <h2>Availability and accuracy</h2>
+      <p>We work to keep the site accurate and running, but we can't promise it will always be available, error-free or up to date, and we may change or remove content at any time.</p>
+
+      <h2>Our liability</h2>
+      <p>The site is provided free of charge. As far as the law allows, we are not liable for any loss arising from your use of it or from relying on its content. Nothing in these terms limits liability that cannot be limited by law, such as for death or personal injury caused by negligence, or for fraud.</p>
+
+      <h2>Your information</h2>
+      <p>How we use any personal information you give us is explained in our <a href="/privacy/">privacy notice</a>.</p>
+
+      <h2>Changes and law</h2>
+      <p>We may update these terms from time to time; the date at the top shows the latest version. These terms are governed by the law of England and Wales, and the courts of England and Wales have jurisdiction.</p>
+
+      <p class="legal-links"><a href="/privacy/">Privacy notice</a></p>
+    </div>
+  </article>
+</Base>

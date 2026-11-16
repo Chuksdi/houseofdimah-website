@@ -1,0 +1,82 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../data/site';
+// DRAFT for Chuks and Kat to review. Plain-English privacy notice for the website.
+// Facts it relies on (keep in step if the site changes): Netlify hosting + Netlify Forms ("start", "brand-audit"),
+// Brand Check answers stay in the browser unless an audit is requested, results PDF made on the device,
+// Google Calendar booking page, images served from Sanity's CDN, fonts self-hosted, no analytics, no ad trackers.
+const L = SITE.legal;
+const title = 'Privacy notice | House of Dimah';
+const description = 'How House of Dimah collects, uses and looks after personal information when you use our website or get in touch.';
+---
+<Base title={title} description={description} breadcrumbs={[{ name: 'Privacy notice', path: '/privacy/' }]}>
+  <article class="inner legal">
+    <div class="wrap">
+      <h1>Privacy notice</h1>
+      <p class="lede">What we collect when you use this website or get in touch, why, and what you can ask us to do with it. Last updated {L.updated}.</p>
+
+      <h2>Who we are</h2>
+      <p>This website is run by {L.company}{L.companyNumber && <>, a company registered in England and Wales (company number {L.companyNumber})</>}{L.registeredOffice && <>, registered office {L.registeredOffice}</>}. In this notice, "we", "us" and "our" mean {L.company}.</p>
+      <p>We are the controller of the personal information described here. {L.icoNumber ? <>We are registered with the Information Commissioner's Office (ICO), registration number {L.icoNumber}.</> : <>We are registered with the Information Commissioner's Office (ICO).</>}</p>
+      <p>Questions about your information go to Kat, who looks after data protection for us: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+
+      <h2>What we collect</h2>
+      <h3>When you fill in the Start here form</h3>
+      <p>Your name, business, email address, phone number (optional), website or Instagram, what you have told us about your situation, your timing and the kind of help you are after.</p>
+      <h3>When you take the Dimah Brand Check</h3>
+      <p>Your answers stay in your browser. They are not sent to us. If you download your results, the PDF is made on your own device and nothing is sent to us.</p>
+      <p>If you ask for a bespoke audit, we receive your name, business, email address, website or Instagram, anything you add in the note, and your Brand Check score and answers, so we can prepare your audit.</p>
+      <h3>When you email us or book a call</h3>
+      <p>Whatever you choose to include in your email. If you book a call, the booking page is run by Google (Google Calendar appointment scheduling): you give your name, email address and any notes to Google, and the booking comes through to our calendar.</p>
+      <h3>When you visit the website</h3>
+      <p>Like every website, our host (Netlify) keeps basic technical logs: your IP address, browser type, the pages you request and when. Some images load from our content service (Sanity), which sees the same kind of request information. We do not use analytics, advertising or tracking tools, and we do not build profiles of visitors.</p>
+
+      <h2>Why we use it, and on what basis</h2>
+      <ul>
+        <li><strong>To reply to you and talk about working together.</strong> When you send a form, request an audit or book a call, we use your details to respond, to prepare your audit or call, and to send you a short plan if you ask for one. Basis: taking steps at your request before a possible contract, and our legitimate interest in answering enquiries.</li>
+        <li><strong>To run the work we do for you</strong>, if you become a client. Basis: our contract with you.</li>
+        <li><strong>To keep the website working and secure</strong>, using the technical logs above. Basis: our legitimate interest in running a safe, reliable website.</li>
+        <li><strong>To meet our legal duties</strong>, for example keeping business and tax records. Basis: legal obligation.</li>
+      </ul>
+      <p>We will not add you to a mailing list or send you marketing unless you have asked us to. We never sell your information.</p>
+
+      <h2>Who we share it with</h2>
+      <p>Only the services that help us run the website and our business, under contracts that require them to protect it:</p>
+      <ul>
+        <li><strong>Netlify</strong>: hosts the website and receives form submissions and audit requests.</li>
+        <li><strong>Google</strong>: our email, calendar and booking page (Google Workspace).</li>
+        <li><strong>Sanity</strong>: stores and serves some of the website's content and images.</li>
+      </ul>
+      <p>Some of these providers are based in, or use servers in, the United States. Where information goes outside the UK, it is protected by the safeguards the law requires, such as the UK International Data Transfer Addendum or the UK-US data bridge.</p>
+      <p>We may also share information if the law requires it, or with professional advisers such as our accountant.</p>
+
+      <h2>How long we keep it</h2>
+      <ul>
+        <li>Enquiries, audit requests and related emails: up to two years after we last heard from you, unless you become a client.</li>
+        <li>Client records: for as long as we work together and then six years, to meet tax and legal requirements.</li>
+        <li>Website technical logs: kept by Netlify for a short period under its own retention rules.</li>
+      </ul>
+
+      <h2>Your rights</h2>
+      <p>You can ask us to:</p>
+      <ul>
+        <li>give you a copy of the information we hold about you</li>
+        <li>correct anything that is wrong</li>
+        <li>delete your information</li>
+        <li>stop or limit how we use it, or object to our using it</li>
+        <li>send your information to you or someone else in a usable format</li>
+      </ul>
+      <p>Email <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. We will reply within one month. There is no charge.</p>
+      <p>If you are unhappy with how we have handled your information, please tell us first so we can put it right. You can also complain to the Information Commissioner's Office at <a href="https://ico.org.uk/make-a-complaint/" target="_blank" rel="noopener">ico.org.uk/make-a-complaint</a> or on 0303 123 1113.</p>
+
+      <h2>Cookies and similar technology</h2>
+      <p>We do not use cookies for analytics, advertising or tracking, so we do not show a cookie banner. If you switch the site between light and dark mode, your browser remembers that choice on your own device so the site stays the way you set it. That is the only thing the site stores, and it never leaves your device.</p>
+      <p>The Google booking page, which opens on Google's own site, uses Google's cookies under Google's privacy policy.</p>
+
+      <h2>Changes to this notice</h2>
+      <p>If we change how we use personal information, we will update this page and the date at the top.</p>
+
+      <p class="legal-links"><a href="/terms/">Website terms</a></p>
+    </div>
+  </article>
+</Base>

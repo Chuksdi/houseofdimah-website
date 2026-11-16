@@ -487,3 +487,13 @@ html[data-mode="light"] .page .tgrid .tier:nth-child(1),html[data-mode="light"] 
 .tiers .lm-link:hover,.tiers .lm-link:focus-visible{animation:lmline .9s var(--ramp)}
 .tiers .lm-link:focus-visible{outline:2px solid currentColor;outline-offset:4px;border-radius:2px}
 @media (prefers-reduced-motion:reduce){.tiers .lm-link:hover,.tiers .lm-link:focus-visible{animation:none}.tiers .lm-link svg{transition:none}}
+
+/* privacy notice and website terms: readable long-form text */
+.inner.legal .wrap{gap:16px;max-width:860px}
+.inner.legal h2{font-size:clamp(24px,2.4vw,32px);margin-top:28px}
+.inner.legal h3{font-family:var(--display);font-weight:800;font-size:18px;letter-spacing:-.01em;margin:10px 0 0}
+.inner.legal p,.inner.legal li{font-size:17px;line-height:1.6;max-width:68ch;color:var(--fg)}
+.inner.legal .lede{color:var(--mute)}
+.inner.legal ul{margin:0;padding-left:20px;display:grid;gap:10px}
+.inner.legal a{color:inherit;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#FF5B23}
+.inner.legal .legal-links{margin-top:32px;font-size:14px}
