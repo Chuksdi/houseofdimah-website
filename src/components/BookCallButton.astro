@@ -1,0 +1,9 @@
+---
+// The one "Book a call" button. Use it everywhere a Book a call appears, so they all look and behave the same:
+// white with a black label, our orange (#FF5B23) with a black label on hover and keyboard focus.
+// Styles live in site.css under .btn-book (so they also work inside set:html and on every layout using site.css).
+import { SITE } from '../data/site';
+interface Props { class?: string }
+const { class: extra = '' } = Astro.props;
+---
+<a class:list={['btn', 'btn-book', extra]} href={`mailto:${SITE.email}?subject=Book%20a%20call`}>Book a call</a>

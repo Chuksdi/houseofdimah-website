@@ -1,5 +1,6 @@
 ---
 import { getContent } from '../lib/content';
+import BookCallButton from './BookCallButton.astro';
 const { settings: SITE } = await getContent(Astro.locals);
 const arrow = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"></path></svg>';
 const needs = ['Branding or a rebrand', 'Social media', 'Photo & video', 'A new website', 'How we talk about ourselves', 'An outside view', 'Content for events', 'Not sure yet'];
@@ -79,7 +80,7 @@ const budgets = ['A one-off project', 'Monthly support', 'Both', 'Not sure yet']
       <small>About five minutes. Ends with a free bespoke audit, if you'd like one.</small>
     </aside>}
     <aside class="lm mail" aria-label="Email us">
-      <div class="acts"><a class="btn ghost" href={`mailto:${SITE.email}`}>Email us</a><a class="btn" href={`mailto:${SITE.email}?subject=Book%20a%20call`}>Book a call</a></div>
+      <div class="acts"><a class="btn ghost" href={`mailto:${SITE.email}`}>Email us</a><BookCallButton /></div>
     </aside>
   </div>
   </div>}

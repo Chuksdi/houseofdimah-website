@@ -108,7 +108,7 @@ html[data-mode="light"] .page .hero .mark .vl{display:block}
 .statement small strong{color:var(--fg);font-weight:600}
 .statement .do-h{margin:0 auto;font-family:var(--display);font-weight:800;letter-spacing:-.025em;font-size:clamp(26px,3.1vw,46px);line-height:1.08;max-width:30ch}
 .statement .btn{margin-top:36px}
-.page .statement a.btn:hover,.page .statement a.btn:focus-visible{background:#788CE3;color:#0B0B0B;transform:none}
+
 
 /* reel */
 .reel{display:grid;gap:12px;padding:0 clamp(12px,1.5vw,20px)}
@@ -288,9 +288,8 @@ html[data-mode="light"] .page .hero .mark .vl{display:block}
 .contact .colhead{font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(246,250,254,.55);margin-bottom:6px}
 .page .foot a{text-decoration:none;color:rgba(246,250,254,.8)}
 .page .foot a:hover{color:#F6FAFE}
-/* filled buttons keep their dark label on hover (the link hover above would turn it white on white) */
-.page .foot a.btn:not(.ghost){transition:background-color .5s var(--ramp),color .5s var(--ramp),transform .5s var(--ramp)}
-.page .foot a.btn:not(.ghost):hover,.page .foot a.btn:not(.ghost):focus-visible{background:#FF5B23;color:#0B0B0B}
+/* footer filled buttons keep their dark label on hover (the link hover above would turn it white on white) */
+.page .foot a.btn:not(.ghost):hover,.page .foot a.btn:not(.ghost):focus-visible{color:#0B0B0B}
 .fine{border-top:1px solid rgba(246,250,254,.14);padding:16px clamp(20px,4vw,72px);font-size:12px;display:flex;flex-wrap:wrap;gap:8px 28px}
 @media (max-width:860px){.method .cols{grid-template-columns:minmax(0,1fr)}.side{display:none}.step{grid-template-columns:minmax(0,1fr)}.step .ph{min-height:360px}.ta,.tb,.tc,.td{grid-column:1/-1;margin-top:0}.foot .three{grid-template-columns:minmax(0,1fr)}.contact{text-align:left}}
 
@@ -474,3 +473,9 @@ html[data-mode="light"] .page .tgrid .tier:nth-child(1),html[data-mode="light"] 
 @media (max-width:860px){.contact .soc{justify-content:flex-start}}
 @media (min-width:861px){.hero{padding-bottom:clamp(36px,5.5svh,56px)}}
 
+
+/* Button components (src/components/BookCallButton.astro, WorkWithUsButton.astro): one hover each, wherever they appear */
+.page a.btn.btn-book,.page a.btn.btn-work{transition:background-color .5s var(--ramp),color .5s var(--ramp),box-shadow .5s var(--ramp),transform .5s var(--ramp)}
+.page a.btn.btn-book:hover,.page a.btn.btn-book:focus-visible{background:#FF5B23;color:#0B0B0B;box-shadow:none;transform:none}
+.page a.btn.btn-work{gap:6px}
+.page a.btn.btn-work:hover,.page a.btn.btn-work:focus-visible{background:#788CE3;color:#0B0B0B;box-shadow:none;transform:none}
