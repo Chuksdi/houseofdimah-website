@@ -479,3 +479,11 @@ html[data-mode="light"] .page .tgrid .tier:nth-child(1),html[data-mode="light"] 
 .page a.btn.btn-book:hover,.page a.btn.btn-book:focus-visible{background:#FF5B23;color:#0B0B0B;box-shadow:none;transform:none}
 .page a.btn.btn-work{gap:6px}
 .page a.btn.btn-work:hover,.page a.btn.btn-work:focus-visible{background:#788CE3;color:#0B0B0B;box-shadow:none;transform:none}
+
+/* "Or book a call" under the pricing tiers, same style as the footer's Brand Check link, lined up with the text in the first box */
+.tiers .lm-link{justify-self:start;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding-bottom:2px;margin-top:-22px;margin-left:27px;font:700 11.5px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:inherit;background:linear-gradient(#FF5B23,#FF5B23) 0 calc(100% - 10px)/100% 2px no-repeat}
+.tiers .lm-link svg{width:14px;height:14px;transition:transform .6s var(--ramp)}
+.tiers .lm-link:hover svg{transform:translateX(4px)}
+.tiers .lm-link:hover,.tiers .lm-link:focus-visible{animation:lmline .9s var(--ramp)}
+.tiers .lm-link:focus-visible{outline:2px solid currentColor;outline-offset:4px;border-radius:2px}
+@media (prefers-reduced-motion:reduce){.tiers .lm-link:hover,.tiers .lm-link:focus-visible{animation:none}.tiers .lm-link svg{transition:none}}
