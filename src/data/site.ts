@@ -12,7 +12,7 @@ export const SITE = {
     company: 'House of Dimah Ltd',
     companyNumber: '', // TODO: Companies House number
     registeredOffice: '', // TODO: registered office address
-    icoNumber: '', // TODO: ICO registration number (starts with Z) once it arrives; application C2087679 paid 14 Nov 2026
+    icoNumber: 'ZC303084', // ICO registration number (application C2087679, paid 14 Nov 2026)
     updated: '16 November 2026',
   },
   areas: ['London', 'Hampshire', 'Dorset'],
