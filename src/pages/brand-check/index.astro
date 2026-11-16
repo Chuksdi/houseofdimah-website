@@ -27,7 +27,7 @@ const description = 'Ten questions that show where your brand is losing people, 
   <article class="bc">
     <section class="wrap intro">
       <div>
-        <h1>The Dimah Brand Check</h1>
+        <h1>The Dimah <span class="keep">Brand Check</span></h1>
         <p class="lede">Ten questions that show where your brand is losing people, and what to fix first.</p>
         <p class="meta"><span>About five minutes</span><span>Your score straight away</span><span><i class="d story"></i>Story</span><span><i class="d brand"></i>Brand</span><span><i class="d content"></i>Content</span></p>
       </div>
@@ -218,6 +218,8 @@ const description = 'Ten questions that show where your brand is losing people, 
   .d.story{background:var(--blizzard)} .d.brand{background:var(--orange)} .d.content{background:var(--kawaii)}
   .intro{padding-top:clamp(48px,7vw,104px);padding-bottom:40px;display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:48px;align-items:end;border-top:1px solid var(--rule)}
   .intro h1{font-size:clamp(52px,7.4vw,112px);line-height:.9;letter-spacing:-.045em}
+  /* desktop: "Brand Check" never splits across lines */
+  @media (min-width:861px){.intro h1 .keep{white-space:nowrap}}
   .lede{font-size:clamp(19px,1.8vw,24px);line-height:1.4;max-width:34ch;margin-top:24px}
   .meta{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:22px;font-size:14px;color:var(--mute)}
   .meta span{display:inline-flex;align-items:center;gap:8px}
