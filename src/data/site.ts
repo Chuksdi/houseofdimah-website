@@ -11,7 +11,7 @@ export const SITE = {
   legal: {
     company: 'House of Dimah Ltd',
     companyNumber: '17578625', // Companies House, incorporated 12 Nov 2026 (England and Wales)
-    registeredOffice: '', // TODO: registered office address
+    registeredOffice: '15 Robinhood Lane, Mitcham, London CR4 1JL', // as filed at Companies House
     icoNumber: 'ZC303084', // ICO registration number (application C2087679, paid 14 Nov 2026)
     updated: '16 November 2026',
   },
