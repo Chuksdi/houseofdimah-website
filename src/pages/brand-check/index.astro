@@ -65,6 +65,10 @@ const description = 'Ten questions that show where your brand is losing people, 
           <p id="bc-fix-intro">Your no answers first, then the sometimes. One practical step for each.</p>
           <ol id="bc-fixes"></ol>
         </div>
+        <div class="dl">
+          <button class="btn" type="button" id="bc-dl">Download your results (PDF) <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 2v9M4 7l4 4 4-4M3 14h10"></path></svg></button>
+          <p>Saved straight to your device. Your answers aren't sent to us. <a href="/media/house-of-dimah-brand-check-v2.pdf" target="_blank" rel="noopener">Or print the blank guide</a></p>
+        </div>
       </div>
     </section>
 
@@ -78,7 +82,6 @@ const description = 'Ten questions that show where your brand is losing people, 
           <li>The three changes that would make the biggest difference</li>
           <li>Free, with an optional call to talk it through</li>
         </ul>
-        <p class="pdf">Prefer it on paper? <a href="/media/house-of-dimah-brand-check-v2.pdf" target="_blank" rel="noopener">Open the printable guide</a></p>
       </div>
       <div class="aside">
       <form class="form locked" name="brand-audit" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="bot-field" id="bc-form">
@@ -188,6 +191,23 @@ const description = 'Ten questions that show where your brand is losing people, 
 })();
 </script>
 
+<script>
+  // "Download your results": the PDF tool only loads when someone clicks
+  const dl = document.getElementById('bc-dl');
+  dl?.addEventListener('click', async () => {
+    const label = dl.firstChild?.textContent;
+    dl.setAttribute('aria-busy', 'true'); if (dl.firstChild) dl.firstChild.textContent = 'Making your PDF… ';
+    try {
+      const m = await import('../../scripts/results-pdf');
+      await m.buildResultsPdf(m.readResults());
+    } catch (e) {
+      console.error(e); alert("Sorry, the PDF didn't download. Please try again.");
+    } finally {
+      dl.removeAttribute('aria-busy'); if (dl.firstChild && label) dl.firstChild.textContent = label;
+    }
+  });
+</script>
+
 <style>
   .bc{--blizzard:#8BDAE4;--orange:#FF5B23;--kawaii:#788CE3}
   .d{display:inline-block;width:9px;height:9px;border-radius:50%}
@@ -248,7 +268,6 @@ const description = 'Ten questions that show where your brand is losing people, 
   .audit ul{margin:22px 0 0;padding:0;list-style:none;display:grid;gap:10px}
   .audit li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;font-size:16px}
   .audit li::before{content:"";width:12px;height:2px;background:var(--orange);margin-top:12px}
-  .pdf{display:flex;gap:10px;align-items:center;margin-top:28px;font-size:14px;color:var(--mute)}
   .pdf a{color:var(--fg);text-underline-offset:3px}
   .form{background:var(--card);border-radius:10px;padding:28px;display:grid;gap:16px;box-shadow:inset 0 0 0 1px var(--rule)}
   .form[hidden]{display:none}
@@ -266,6 +285,11 @@ const description = 'Ten questions that show where your brand is losing people, 
   .th{font-size:30px;line-height:1.05}
   .thanks p{opacity:.82}
   .thanks .btn.ghost{justify-self:start}
+  .dl{display:grid;gap:12px;justify-items:start;margin-top:40px;padding-top:32px;border-top:1px solid var(--rule)}
+  .dl .btn svg{width:16px;height:16px}
+  .dl .btn[aria-busy="true"]{opacity:.6;pointer-events:none}
+  .dl p{font-size:14px;color:var(--mute)}
+  .dl p a{color:var(--fg);text-underline-offset:3px}
   .aside{display:grid;gap:16px;align-content:start;min-width:0}
   /* email / call card: same surface as the form, so it follows light and dark mode */
   .talk{background:var(--card);border-radius:10px;padding:24px 28px;box-shadow:inset 0 0 0 1px var(--rule);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
