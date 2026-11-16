@@ -5,6 +5,8 @@ export const SITE = {
   name: 'House of Dimah',
   url: 'https://houseofdimah.co.uk',
   email: 'hello@houseofdimah.co.uk',
+  // Google Calendar booking page: every Book a call goes here
+  bookingUrl: 'https://calendar.app.google/6iVbPHGabS9bqjmo8',
   areas: ['London', 'Hampshire', 'Dorset'],
   // TODO: real profile links before launch (V9 still has them as "#")
   instagram: '',
