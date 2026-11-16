@@ -10,7 +10,7 @@ export const SITE = {
   // Legal details shown on /privacy/ and /terms/. Leave a field empty and the sentence that uses it is left out.
   legal: {
     company: 'House of Dimah Ltd',
-    companyNumber: '', // TODO: Companies House number
+    companyNumber: '17578625', // Companies House, incorporated 12 Nov 2026 (England and Wales)
     registeredOffice: '', // TODO: registered office address
     icoNumber: 'ZC303084', // ICO registration number (application C2087679, paid 14 Nov 2026)
     updated: '16 November 2026',
