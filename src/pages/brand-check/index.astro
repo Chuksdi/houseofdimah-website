@@ -80,6 +80,7 @@ const description = 'Ten questions that show where your brand is losing people, 
         </ul>
         <p class="pdf">Prefer it on paper? <a href="/media/house-of-dimah-brand-check-v2.pdf" target="_blank" rel="noopener">Open the printable guide</a></p>
       </div>
+      <div class="aside">
       <form class="form locked" name="brand-audit" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="bot-field" id="bc-form">
         <input type="hidden" name="form-name" value="brand-audit">
         <input type="hidden" name="score" id="bc-f-score" value="">
@@ -107,6 +108,11 @@ const description = 'Ten questions that show where your brand is losing people, 
         <h2 class="th">Thanks. Your audit is on its way.</h2>
         <p>We'll look at your brand ourselves and email your audit within five working days. If anything's urgent, write to {SITE.email}.</p>
         <a class="btn ghost" href="/">Back to the homepage</a>
+      </div>
+      <div class="talk" aria-label="Rather talk to us?">
+        <a class="btn ghost" href={`mailto:${SITE.email}`}>Email us</a>
+        <a class="btn" href={`mailto:${SITE.email}?subject=Book%20a%20call`}>Book a call</a>
+      </div>
       </div>
     </section>
   </article>
@@ -260,6 +266,11 @@ const description = 'Ten questions that show where your brand is losing people, 
   .th{font-size:30px;line-height:1.05}
   .thanks p{opacity:.82}
   .thanks .btn.ghost{justify-self:start}
+  .aside{display:grid;gap:16px;align-content:start;min-width:0}
+  /* email / call card: same surface as the form, so it follows light and dark mode */
+  .talk{background:var(--card);border-radius:10px;padding:24px 28px;box-shadow:inset 0 0 0 1px var(--rule);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .talk .btn{justify-content:center;padding-left:10px;padding-right:10px;white-space:nowrap}
+  @media (max-width:520px){.talk{grid-template-columns:minmax(0,1fr)}}
   @media (max-width:860px){
     .intro{grid-template-columns:minmax(0,1fr)}.cover{justify-self:start;max-width:160px}
     .q{grid-template-columns:40px minmax(0,1fr)}.opts{grid-column:1/-1}.opt{flex:1}.opt span{width:100%;min-width:0}
