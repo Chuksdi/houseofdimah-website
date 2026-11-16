@@ -289,7 +289,8 @@ html[data-mode="light"] .page .hero .mark .vl{display:block}
 .page .foot a{text-decoration:none;color:rgba(246,250,254,.8)}
 .page .foot a:hover{color:#F6FAFE}
 /* filled buttons keep their dark label on hover (the link hover above would turn it white on white) */
-.page .foot a.btn:not(.ghost):hover,.page .foot a.btn:not(.ghost):focus-visible{color:#0B0B0B}
+.page .foot a.btn:not(.ghost){transition:background-color .5s var(--ramp),color .5s var(--ramp),transform .5s var(--ramp)}
+.page .foot a.btn:not(.ghost):hover,.page .foot a.btn:not(.ghost):focus-visible{background:#FF5B23;color:#0B0B0B}
 .fine{border-top:1px solid rgba(246,250,254,.14);padding:16px clamp(20px,4vw,72px);font-size:12px;display:flex;flex-wrap:wrap;gap:8px 28px}
 @media (max-width:860px){.method .cols{grid-template-columns:minmax(0,1fr)}.side{display:none}.step{grid-template-columns:minmax(0,1fr)}.step .ph{min-height:360px}.ta,.tb,.tc,.td{grid-column:1/-1;margin-top:0}.foot .three{grid-template-columns:minmax(0,1fr)}.contact{text-align:left}}
 

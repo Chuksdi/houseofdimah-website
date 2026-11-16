@@ -297,6 +297,8 @@ const description = 'Ten questions that show where your brand is losing people, 
   /* email / call card: same surface as the form, so it follows light and dark mode */
   .talk{background:var(--card);border-radius:10px;padding:24px 28px;box-shadow:inset 0 0 0 1px var(--rule);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
   .talk .btn{justify-content:center;padding-left:10px;padding-right:10px;white-space:nowrap}
+  .talk .btn:not(.ghost){transition:background-color .5s var(--ramp),color .5s var(--ramp)}
+  .talk .btn:not(.ghost):hover,.talk .btn:not(.ghost):focus-visible{background:#FF5B23;color:#0B0B0B}
   @media (max-width:520px){.talk{grid-template-columns:minmax(0,1fr)}}
   @media (max-width:860px){
     .intro{grid-template-columns:minmax(0,1fr)}.cover{justify-self:start;max-width:160px}
