@@ -33,7 +33,7 @@ const description = 'Ten questions that show where your brand is losing people, 
 
     <div class="prog"><div class="wrap"><div class="bar"><span id="bc-bar"></span></div><small id="bc-count">0 of 10 answered</small></div></div>
 
-    <section class="wrap qs" aria-label="The ten questions">
+    <section class="wrap qs" id="questions" aria-label="The ten questions">
       {Q.map((q, i) => (
         <fieldset class="q" data-q={i} data-area={q.area}>
           <legend class="sr">Question {i + 1}</legend>
@@ -80,12 +80,18 @@ const description = 'Ten questions that show where your brand is losing people, 
         </ul>
         <p class="pdf">Prefer it on paper? <a href="/media/house-of-dimah-brand-check-v2.pdf" target="_blank" rel="noopener">Open the printable guide</a></p>
       </div>
-      <form class="form" name="brand-audit" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="bot-field" id="bc-form">
+      <form class="form locked" name="brand-audit" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="bot-field" id="bc-form">
         <input type="hidden" name="form-name" value="brand-audit">
         <input type="hidden" name="score" id="bc-f-score" value="">
         <input type="hidden" name="answers" id="bc-f-answers" value="">
         <p hidden><label>Leave this empty <input name="bot-field"></label></p>
         <div class="scorechip"><span>Your Dimah Brand Check score</span><b id="bc-chip">Not taken yet</b></div>
+        <div class="lockmsg" id="bc-lock">
+          <p>The bespoke audit opens once you have your score. Answer the ten questions above, and we'll start from your answers.</p>
+          <a class="btn ghost" href="#questions">Take the check</a>
+        </div>
+        <fieldset class="unlock" id="bc-fields" disabled>
+        <legend class="sr">Your details</legend>
         <div class="two">
           <div class="field"><label for="ba-name">Your name</label><input id="ba-name" name="name" type="text" autocomplete="name" required></div>
           <div class="field"><label for="ba-biz">Business</label><input id="ba-biz" name="business" type="text" autocomplete="organization" required></div>
@@ -95,6 +101,7 @@ const description = 'Ten questions that show where your brand is losing people, 
         <div class="field"><label for="ba-note">Anything you'd like us to look at first? (optional)</label><textarea id="ba-note" name="note"></textarea></div>
         <button class="btn" type="submit">Request my audit</button>
         <small>Chuks or Kat will do it themselves, within five working days. No spam.</small>
+        </fieldset>
       </form>
       <div class="form thanks" id="bc-thanks" hidden role="status">
         <h2 class="th">Thanks. Your audit is on its way.</h2>
@@ -110,6 +117,8 @@ const description = 'Ten questions that show where your brand is losing people, 
   const AREA = { story: 'Story', brand: 'Brand', content: 'Content' };
   const $ = (s) => document.querySelector(s);
   const ans = {};
+  const loadedAt = Date.now(); let scored = false;
+  const form = document.querySelector('#bc-form');
   const bar = $('#bc-bar'), count = $('#bc-count'), left = $('#bc-left'), show = $('#bc-show');
   const update = () => {
     const n = Object.keys(ans).length;
@@ -150,19 +159,24 @@ const description = 'Ten questions that show where your brand is losing people, 
     });
     $('#bc-fix-intro').textContent = order.length ? 'Your no answers first, then the sometimes. One practical step for each.' : 'No zeros or "sometimes" answers. Your brand is doing its job: keep the rhythm, keep measuring, and keep the photos fresh.';
     $('#bc-chip').textContent = score + ' / 20';
+    // the audit request only opens once there's a real score
+    scored = true; form.classList.remove('locked'); $('#bc-fields').disabled = false;
     $('#bc-f-score').value = score + ' / 20 (' + band[0] + ')';
     $('#bc-f-answers').value = Q.map((q, i) => (i + 1) + '. ' + ['No', 'Sometimes', 'Yes'][ans[i]]).join(' | ');
     const res = $('#result'); res.hidden = false;
     res.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
   });
-  // send the audit request to Netlify Forms without leaving the page
-  const form = $('#bc-form');
+  // send the audit request to Netlify Forms without leaving the page.
+  // Bot checks: no score yet, or sent within seconds of the page opening, means it isn't a person.
+  // Those get the normal thank-you, but nothing is sent.
   form.addEventListener('submit', (e) => {
     e.preventDefault();
+    const thanks = () => { form.hidden = true; $('#bc-thanks').hidden = false; };
+    if (!scored || !$('#bc-f-score').value || Date.now() - loadedAt < 8000) { thanks(); return; }
     if (!form.reportValidity()) return;
     const btn = form.querySelector('button[type="submit"]'); btn.disabled = true;
     fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(new FormData(form)).toString() })
-      .then((r) => { if (!r.ok) throw new Error(); form.hidden = true; $('#bc-thanks').hidden = false; })
+      .then((r) => { if (!r.ok) throw new Error(); thanks(); })
       .catch(() => { btn.disabled = false; form.submit(); });
   });
 })();
@@ -238,6 +252,11 @@ const description = 'Ten questions that show where your brand is losing people, 
   .scorechip{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;border-radius:8px;background:var(--rule);font-size:14px;color:var(--mute)}
   .scorechip b{color:var(--fg);font-family:var(--display);font-size:18px}
   .form small{font-size:12.5px;color:var(--mute)}
+  .unlock{border:0;margin:0;padding:0;min-width:0;display:grid;gap:16px}
+  .form.locked .unlock{display:none}
+  .lockmsg{display:none;gap:14px;justify-items:start}
+  .form.locked .lockmsg{display:grid}
+  .lockmsg p{color:var(--mute);line-height:1.5}
   .th{font-size:30px;line-height:1.05}
   .thanks p{opacity:.82}
   .thanks .btn.ghost{justify-self:start}

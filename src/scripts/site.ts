@@ -111,8 +111,11 @@ if (form) {
   };
   $$('[data-next]', form).forEach((b) => b.addEventListener('click', () => { if (valid()) show(step + 1); }));
   $$('[data-back]', form).forEach((b) => b.addEventListener('click', () => show(Math.max(1, step - 1))));
+  const loadedAt = Date.now();
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    // bot check: nobody fills three steps within seconds of the page opening. Show the thank-you, send nothing.
+    if (Date.now() - loadedAt < 5000) { form.hidden = true; show(4); return; }
     const body = new URLSearchParams(new FormData(form) as unknown as Record<string, string>).toString();
     try {
       const r = await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body });
