@@ -1,6 +1,14 @@
 ---
 import Base from '../../layouts/Base.astro';
+import CaseLayout from '../../layouts/CaseLayout.astro';
 import { getContent } from '../../lib/content';
+import CASE_META from '../../data/cases/meta.json';
+import tubScript from '../../scripts/case-tub.js?raw';
+import countScript from '../../scripts/case-count.js?raw';
+
+// Full stories, built from the Case boards on the Site Board (src/data/cases/<slug>.html + .css)
+const caseHtml = import.meta.glob('../../data/cases/*.html', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
+const caseCss = import.meta.glob('../../data/cases/*.css', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
 
 export async function getStaticPaths() {
   const { cases } = await getContent();
@@ -10,19 +18,37 @@ const { cases } = await getContent(Astro.locals);
 // look the story up per request too, so the preview site (rendered on demand) works
 const c = cases.find((o) => o.slug === Astro.params.slug);
 if (!c) return Astro.rewrite('/404/');
-const title = `${c.name}: client story | House of Dimah`;
-const description = `How House of Dimah worked with ${c.name}: ${c.tags.join(' and ').toLowerCase()}.`;
+const slug = c.slug;
+const body = caseHtml[`../../data/cases/${slug}.html`];
+const css = caseCss[`../../data/cases/${slug}.css`];
+const meta = (CASE_META as Record<string, { name: string; brief: string }>)[slug];
+const title = `${meta?.name ?? c.name}: client story | House of Dimah`;
+const description = meta?.brief || `How House of Dimah worked with ${c.name}: ${c.tags.join(' and ').toLowerCase()}.`;
+const crumbs = [{ name: 'Client stories', path: '/#work' }, { name: c.name, path: `/work/${slug}/` }];
 ---
-<Base title={title} description={description} breadcrumbs={[{ name: 'Client stories', path: '/#work' }, { name: c.name, path: `/work/${c.slug}/` }]}>
-  <article class="inner">
-    <div class="wrap">
-      <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/#work">Client stories</a> / <span aria-current="page">{c.name}</span></nav>
-      <h1>{c.name}</h1>
-      <p class="tags-line">{c.tags.join(' · ')}</p>
-      <img class={`case-hero ${c.fit ? 'fit' : ''}`} src={c.img} alt={c.alt} style={c.colour ? `background:${c.colour}` : undefined}>
-      {/* TODO: port the full case study from this client's Case board on the Site Board */}
-      <p class="lede">{c.summary || 'The full story is on its way.'}</p>
-      <a class="btn" href="/#start">Start here</a>
-    </div>
-  </article>
-</Base>
+{body ? (
+  <CaseLayout title={title} description={description} image={c.img} breadcrumbs={crumbs}>
+    <style is:inline slot="head" set:html={css}></style>
+    <main set:html={body} />
+    {slug === 'british-chiropractic-association' && <script is:inline set:html={countScript}></script>}
+    {slug === 'mr-strongmans' && <>
+      <script is:inline src="/vendor/three/three.min.js"></script>
+      <script is:inline src="/vendor/three/GLTFLoader.js"></script>
+      <script is:inline src="/vendor/three/RoomEnvironment.js"></script>
+      <script is:inline set:html={tubScript}></script>
+    </>}
+  </CaseLayout>
+) : (
+  <Base title={title} description={description} breadcrumbs={crumbs}>
+    <article class="inner">
+      <div class="wrap">
+        <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/#work">Client stories</a> / <span aria-current="page">{c.name}</span></nav>
+        <h1>{c.name}</h1>
+        <p class="tags-line">{c.tags.join(' · ')}</p>
+        <img class={`case-hero ${c.fit ? 'fit' : ''}`} src={c.img} alt={c.alt} style={c.colour ? `background:${c.colour}` : undefined}>
+        <p class="lede">{c.summary || 'The full story is on its way.'}</p>
+        <a class="btn" href="/#start">Start here</a>
+      </div>
+    </article>
+  </Base>
+)}
