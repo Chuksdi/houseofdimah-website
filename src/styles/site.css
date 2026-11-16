@@ -468,3 +468,8 @@ html[data-mode="light"] .page .tgrid .tier:nth-child(1),html[data-mode="light"] 
 .contact .soc svg{width:22px;height:22px}
 @media (max-width:860px){.contact .soc{justify-content:flex-start}}
 @media (min-width:861px){.hero{padding-bottom:clamp(36px,5.5svh,56px)}}
+
+/* Brand Check page: no Start here form, just the email / call card */
+.foot .intake-row.solo{grid-template-columns:minmax(0,300px);border-bottom:0}
+@media (min-width:861px){.foot .intake-row.solo{padding-left:0;padding-right:0}}
+.foot .intake-row.solo .lm-col{margin-top:clamp(56px,6vw,90px);margin-bottom:0}
