@@ -77,8 +77,8 @@ const days = [
       <div class="svc-grid">
         {SERVICES.map((s, i) => (
           <>
-            <button class="svc-tile" type="button" aria-expanded="false" aria-controls={`svc-${i}`} data-svc={i}>
-              <i class="ph" style={`background-image:url(/media/services/${s.slug}.jpg)`} aria-hidden="true"></i><b>{s.name}</b><span><span data-cta>What it covers</span> <Fragment set:html={arrowUp} /></span>
+            <button class="svc-tile" type="button" style={`--c:${['#8BDAE4', '#FF5B23', '#788CE3'][i % 3]}`} aria-expanded="false" aria-controls={`svc-${i}`} data-svc={i}>
+              <i class="ph" style={`background-image:url(/media/services/${s.slug}-v2.jpg)`} aria-hidden="true"></i><b>{s.name}</b><span><span data-cta>What it covers</span> <Fragment set:html={arrowUp} /></span>
             </button>
             <div class="svc-pop" id={`svc-${i}`} role="region" aria-label={s.name} hidden>
               <button class="svc-close" type="button" aria-label="Close" data-svc-close><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"></path></svg></button>
