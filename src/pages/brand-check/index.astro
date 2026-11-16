@@ -3,19 +3,21 @@ import Base from '../../layouts/Base.astro';
 import { SITE } from '../../data/site';
 
 // The Brand Check: ten questions, a score out of 20, the fixes that matter, then an optional bespoke audit.
+// Copy matches the Brand Check board on the Site Board. `some` is the fix for a Sometimes answer (a No keeps `fix`);
+// `noSome` questions are yes-or-no only.
 // Answers stay in the browser; only someone who asks for the audit sends anything (Netlify Forms, form "brand-audit").
 const AREAS = { story: 'Story', brand: 'Brand', content: 'Content' } as const;
-const Q: { area: keyof typeof AREAS; q: string; hint: string; fix: string }[] = [
-  { area: 'story', q: 'Can you say what you do, for whom, in one sentence?', hint: 'Not a slogan. The sentence you would say to a stranger at a bus stop.', fix: 'Write it as "We help [who] [do what], in [where]." Test it on three customers and keep the version they repeat back.' },
-  { area: 'story', q: 'Would your customers describe you the same way?', hint: 'Read your last five reviews. Do they praise the thing you think you are best at?', fix: 'Ask five regulars why they come back, and use their words on your website and in your bio.' },
-  { area: 'brand', q: 'Do your logo, colours and fonts look the same everywhere?', hint: 'Shopfront, website, Instagram, menu or price list, invoices, van. Lay them side by side.', fix: 'List every place your logo appears and replace the odd ones out first, starting with the ones customers see most.' },
-  { area: 'brand', q: 'Does your brand still look like the business you are today?', hint: 'If you have grown, moved upmarket or added a site since the logo was made, it may be holding you back.', fix: 'A refresh is not a rebrand. Keep what people recognise and modernise the rest.' },
-  { area: 'content', q: "Does your website's first screen say what you do, where, and how to get in touch?", hint: 'Open it on your phone. Can you find all three without scrolling?', fix: 'Put one clear line and one button ("Book", "Call", "Order") at the top of the page.' },
-  { area: 'content', q: 'Do you post on social media on a steady rhythm?', hint: 'Weekly and planned counts as yes. Bursts, then silence for weeks, counts as no.', fix: 'Pick a pace you can keep, even twice a week, and plan four weeks ahead.' },
-  { area: 'content', q: 'Are your photos and videos of your real people, place and product?', hint: 'Stock images and phone snaps in bad light both tell people you are not quite sure of yourself.', fix: 'Book one proper shoot day. A good day of photos can last a whole season.' },
-  { area: 'story', q: 'Does everything you write sound like the same person?', hint: 'Website, captions, emails and signs. Same warmth, same words, same level of formality.', fix: 'Write down five words for how you sound, and five you would never use. Share them with anyone who writes for you.' },
-  { area: 'brand', q: "Can a new customer see proof that you're good within ten seconds?", hint: 'Reviews, testimonials, names of clients, before and after. Somewhere they will actually see it.', fix: 'Put your three best reviews on your homepage and pin one on Instagram.' },
-  { area: 'content', q: "Do you know what you're posting next month, and why?", hint: 'A plan tied to what the business needs (a launch, a quiet season, a new service), and a way to see what worked.', fix: 'Start each month with one goal, and check at the end what moved it.' },
+const Q: { area: keyof typeof AREAS; q: string; hint: string; fix: string; some?: string; noSome?: boolean }[] = [
+  {"area": "story", "q": "Can you say what you do and for whom, in one sentence?", "hint": "Not a slogan. The sentence you would say to a stranger at a bus stop.", "fix": "Write it as 'We help [who] [achieve what] by [how].' Then check three things: 1) It's about your customer, not you; 2) It's specific enough to rule some people out; and 3) It includes at least one detail that's distinctly yours.", "noSome": true},
+  {"area": "story", "q": "Would your customers describe you the same way?", "hint": "Read your last five reviews. Do they praise the thing you think you are best at?", "fix": "Ask five regulars why they come back, and use their words on your website and in your bio.", "some": "Compare the customers who describe you the way you'd hope with those who don't. Look at where they found you and what they bought, then make the rest of your touchpoints tell the same story."},
+  {"area": "brand", "q": "Do your logo, colours and fonts look the same everywhere?", "hint": "From physical spaces and digital platforms to printed materials and everyday business assets. Lay them side by side.", "fix": "Set out your brand basics on one page: logo versions, exact colour codes and fonts. Then check every touchpoint against it and fix the odd ones out, starting with what customers see most.", "noSome": true},
+  {"area": "brand", "q": "Does your brand still reflect the business you are today?", "hint": "If your business has grown, evolved its services or shifted focus, your brand may no longer reflect where you are today.", "fix": "A refresh is not a rebrand. Keep what people recognise and modernise the rest.", "some": "Your core is still right. Update the parts that have drifted, usually imagery, tone and the website, before they start to date the rest."},
+  {"area": "content", "q": "Does the top of your website say what you do, where, and how to get in touch?", "hint": "Open it on your phone. Can you find all three without scrolling?", "fix": "At the top of your homepage, add one line that says what you do and where, plus one clear button to get in touch ('Book', 'Call' or 'Enquire'). Then open it on your phone and make sure all of this shows before you scroll.", "noSome": true},
+  {"area": "content", "q": "Do you post on social media at a steady rhythm?", "hint": "Think about the last three months. Regular, planned posting is a yes; bursts followed by long gaps is a no; somewhere in between is a sometimes.", "fix": "Pick a pace you can keep, even twice a week, and plan four weeks ahead.", "some": "You have the habit, now protect it. Protect time in your calendar to plan a month ahead so busy weeks don't break the rhythm."},
+  {"area": "content", "q": "Does your content show the real people and work behind your business?", "hint": "Your team, your process, your customers and the work you deliver. Generic content makes it hard for people to connect with who you are.", "fix": "Plan one professional shoot around your team and their work, and build a bank of photos and short videos you can use across your channels for months.", "some": "Look through your website and social channels for stock images or generic graphics, and replace them with footage of your own team and work, starting with the ones people see first."},
+  {"area": "story", "q": "Does everything your business writes sound like the same person?", "hint": "A consistent tone of voice and clear key messages make you recognisable wherever people meet you.", "fix": "Start by choosing three to five words for how your brand should sound (e.g. warm, direct, expert). Then write your key messages in that tone, and share both with everyone who writes for the business.", "some": "Find where the voice slips, often hurried emails or captions, and share your tone-of-voice notes with whoever writes them."},
+  {"area": "brand", "q": "Can a new customer see proof that you're good within ten seconds?", "hint": "Reviews, testimonials, names of clients, before and after. Somewhere they can easily see these.", "fix": "Put your three best reviews on your homepage and pin at least one on your social channels.", "noSome": true},
+  {"area": "content", "q": "Do you know what you're posting next month, and why?", "hint": "A plan tied to what the business needs (a launch, a quiet season, a new service), and a way to see what worked.", "fix": "Set your social media goals for the next three months based on what the business needs, and give each platform a clear job. Then plan each month's content around those goals, and review what worked before planning the next.", "noSome": true},
 ];
 const title = 'Free Dimah Brand Check | House of Dimah';
 const description = 'Ten questions that show where your brand is losing people, and what to fix first. Free, about five minutes, with your score straight away.';
@@ -41,12 +43,12 @@ const description = 'Ten questions that show where your brand is losing people, 
           <div><h2>{q.q}<i class={`d ${q.area}`} aria-hidden="true"></i></h2><p>{q.hint}</p></div>
           <div class="opts">
             <label class="opt"><input type="radio" name={`q${i}`} value="2"><span>Yes</span></label>
-            <label class="opt"><input type="radio" name={`q${i}`} value="1"><span>Sometimes</span></label>
+            {!q.noSome && <label class="opt"><input type="radio" name={`q${i}`} value="1"><span>Sometimes</span></label>}
             <label class="opt"><input type="radio" name={`q${i}`} value="0"><span>No</span></label>
           </div>
         </fieldset>
       ))}
-      <div class="see"><p id="bc-left">Answer all ten to see your score.</p><button class="btn" type="button" id="bc-show" aria-disabled="true">See my score</button></div>
+      <div class="see"><p id="bc-left">10 to go. Answer them all to see your score.</p><button class="btn" type="button" id="bc-show" aria-disabled="true">See my score</button></div>
     </section>
 
     <section class="res" id="result" hidden aria-live="polite">
@@ -67,7 +69,7 @@ const description = 'Ten questions that show where your brand is losing people, 
         </div>
         <div class="dl">
           <button class="btn" type="button" id="bc-dl">Download your results (PDF) <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 2v9M4 7l4 4 4-4M3 14h10"></path></svg></button>
-          <p>Saved straight to your device. Your answers aren't sent to us. <a href="/media/house-of-dimah-brand-check-v2.pdf" target="_blank" rel="noopener">Or print the blank guide</a></p>
+          <p>Saved straight to your device.</p>
         </div>
       </div>
     </section>
@@ -109,7 +111,7 @@ const description = 'Ten questions that show where your brand is losing people, 
       </form>
       <div class="form thanks" id="bc-thanks" hidden role="status">
         <h2 class="th">Thanks. Your audit is on its way.</h2>
-        <p>We'll look at your brand ourselves and email your audit within five working days. If anything's urgent, write to {SITE.email}.</p>
+        <p>We'll look at your brand and email your audit within five working days. In the meantime, if you have any questions, write to {SITE.email}.</p>
         <a class="btn ghost" href="/">Back to the homepage</a>
       </div>
       <div class="talk" aria-label="Rather talk to us?">
@@ -133,7 +135,7 @@ const description = 'Ten questions that show where your brand is losing people, 
     const n = Object.keys(ans).length;
     bar.style.width = n * 10 + '%';
     count.textContent = n + ' of 10 answered';
-    left.textContent = n === 10 ? 'All ten answered.' : (10 - n) + ' to go. Answer all ten to see your score.';
+    left.textContent = n === 10 ? 'All 10 answered.' : (10 - n) + ' to go. Answer them all to see your score.';
     show.setAttribute('aria-disabled', n === 10 ? 'false' : 'true');
     document.querySelectorAll('.q').forEach((f) => f.classList.toggle('done', f.dataset.q in ans));
   };
@@ -143,9 +145,9 @@ const description = 'Ten questions that show where your brand is losing people, 
   show.addEventListener('click', () => {
     if (Object.keys(ans).length < 10) return;
     const score = Object.values(ans).reduce((a, b) => a + b, 0);
-    const band = score >= 16 ? ['Strong foundations', 'Your brand is working. The gains now come from consistency and a plan: keep the rhythm, keep measuring, and keep the photos fresh.']
-      : score >= 9 ? ['Good, but leaking', "People like you once they find you, but the brand isn't doing enough of the work. Fix your zeros first. They're usually quick wins."]
-      : ['Time for a proper look', 'Customers are probably getting mixed messages. Start with questions 1 and 3: get the story and the look right, and the rest gets easier.'];
+    const band = score >= 16 ? ['Strong foundations', 'Your brand is working. The next gains come from consistency and planning. Keep the rhythm, keep measuring, and keep the content fresh.']
+      : score >= 9 ? ['Doing well, could do more', "You're doing a lot right, but there are gaps between how good you are and how good you look. A few focused changes will make a real difference."]
+      : ['Time for a proper look', 'Customers are probably getting mixed messages. Start with your one-sentence story and a consistent look, and the rest gets easier.'];
     $('#bc-score').textContent = score;
     $('#bc-band').textContent = band[0];
     $('#bc-band-text').textContent = band[1];
@@ -162,11 +164,12 @@ const description = 'Ten questions that show where your brand is losing people, 
       li.innerHTML = '<span class="n"></span><div><b></b><p></p></div><small></small>';
       li.querySelector('.n').textContent = String(i + 1).padStart(2, '0');
       li.querySelector('b').textContent = Q[i].q;
-      li.querySelector('p').textContent = Q[i].fix;
+      li.querySelector('p').textContent = (ans[i] === 1 && Q[i].some) || Q[i].fix;
       li.querySelector('small').textContent = (ans[i] === 0 ? 'No · ' : 'Sometimes · ') + AREA[Q[i].area];
       list.appendChild(li);
     });
-    $('#bc-fix-intro').textContent = order.length ? 'Your no answers first, then the sometimes. One practical step for each.' : "Full marks. Your story, brand and content are all working together. From here it's about growth: new audiences, new channels and bigger ideas. A bespoke audit can show you where to start.";
+    const hasNo = order.some((i) => ans[i] === 0), hasSome = order.some((i) => ans[i] === 1);
+    $('#bc-fix-intro').textContent = order.length ? (hasNo && hasSome ? 'Your no answers first, then the sometimes. One practical step for each.' : hasNo ? 'One practical step for each of your no answers.' : 'One practical step for each of your sometimes answers.') : "Full marks. Your story, brand and content are all working together. From here it's about growth: new audiences, new channels and bigger ideas. A bespoke audit can show you where to start.";
     $('#bc-chip').textContent = score + ' / 20';
     // the audit request only opens once there's a real score
     scored = true; form.classList.remove('locked'); $('#bc-fields').disabled = false;
