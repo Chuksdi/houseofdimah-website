@@ -166,7 +166,7 @@ const description = 'Ten questions that show where your brand is losing people, 
       li.querySelector('small').textContent = (ans[i] === 0 ? 'No · ' : 'Sometimes · ') + AREA[Q[i].area];
       list.appendChild(li);
     });
-    $('#bc-fix-intro').textContent = order.length ? 'Your no answers first, then the sometimes. One practical step for each.' : 'No zeros or "sometimes" answers. Your brand is doing its job: keep the rhythm, keep measuring, and keep the photos fresh.';
+    $('#bc-fix-intro').textContent = order.length ? 'Your no answers first, then the sometimes. One practical step for each.' : "Full marks. Your story, brand and content are all working together. From here it's about growth: new audiences, new channels and bigger ideas. A bespoke audit can show you where to start.";
     $('#bc-chip').textContent = score + ' / 20';
     // the audit request only opens once there's a real score
     scored = true; form.classList.remove('locked'); $('#bc-fields').disabled = false;
