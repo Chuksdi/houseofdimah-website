@@ -3,6 +3,7 @@
 // They carry their own header and closing call to action, so they skip the site's nav, footer and site.css.
 import { SITE, ORG_SCHEMA } from '../data/site';
 import { PREVIEW } from '../lib/content';
+import CaseFooter from '../components/CaseFooter.astro';
 
 interface Props {
   title: string;
@@ -46,5 +47,6 @@ const blocks = [ORG_SCHEMA, crumbSchema];
 </head>
 <body>
   <slot />
+  <CaseFooter />
 </body>
 </html>

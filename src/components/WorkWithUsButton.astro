@@ -2,8 +2,8 @@
 // The one "Work with us" button. Use it everywhere a Work with us appears, so they all match:
 // on hover and keyboard focus it turns our violet (#788CE3) with a black label.
 // Styles live in site.css under .btn-work.
-interface Props { href?: string; class?: string }
-const { href = '#start', class: extra = '' } = Astro.props;
+interface Props { href?: string; class?: string; arrow?: boolean }
+const { href = '#start', class: extra = '', arrow = true } = Astro.props;
 const arrowUp = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12L12 4M6 4h6v6"></path></svg>';
 ---
-<a class:list={['btn', 'btn-work', extra]} href={href}>Work with us<Fragment set:html={arrowUp} /></a>
+<a class:list={['btn', 'btn-work', extra]} href={href}>Work with us{arrow && <Fragment set:html={arrowUp} />}</a>
