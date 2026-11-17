@@ -19,6 +19,7 @@ const localBusiness = {
   url: `${SITE.url}/`,
   image: `${SITE.url}/media/logo-black.png`,
   email: settings.email,
+  telephone: SITE.phoneIntl,
   description,
   address: { '@type': 'PostalAddress', addressLocality: 'Bournemouth', addressRegion: 'Dorset', addressCountry: 'GB' },
   areaServed: settings.areas.map((a) => ({ '@type': 'AdministrativeArea', name: a })),

@@ -5,6 +5,9 @@ export const SITE = {
   name: 'House of Dimah',
   url: 'https://houseofdimah.co.uk',
   email: 'hello@houseofdimah.co.uk',
+  // shown in the footer and given to Google; must match the Google Business Profile
+  phone: '07508 811162',
+  phoneIntl: '+447508811162',
   // Google Calendar booking page: every Book a call goes here
   bookingUrl: 'https://calendar.app.google/6iVbPHGabS9bqjmo8',
   // Legal details shown on /privacy/ and /terms/. Leave a field empty and the sentence that uses it is left out.
