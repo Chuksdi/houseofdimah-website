@@ -299,7 +299,8 @@ const description = 'Ten questions that show where your brand is losing people, 
   .aside{display:grid;gap:16px;align-content:start;min-width:0}
   /* email / call card: same surface as the form, so it follows light and dark mode */
   .talk{background:var(--card);border-radius:10px;padding:24px 28px;box-shadow:inset 0 0 0 1px var(--rule);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-  .talk .btn{justify-content:center;padding-left:10px;padding-right:10px;white-space:nowrap}
+  /* :global so it reaches the BookCallButton component too (scoped styles stop at components) */
+  .talk :global(.btn){justify-content:center;padding-left:10px;padding-right:10px;white-space:nowrap}
   @media (max-width:520px){.talk{grid-template-columns:minmax(0,1fr)}}
   @media (max-width:860px){
     .intro{grid-template-columns:minmax(0,1fr)}.cover{justify-self:start;max-width:160px}
