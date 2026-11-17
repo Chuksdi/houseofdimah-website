@@ -1,7 +1,9 @@
 ---
 import { getContent } from '../lib/content';
 import BookCallButton from './BookCallButton.astro';
-const { settings: SITE } = await getContent(Astro.locals);
+const { settings: SITE, services } = await getContent(Astro.locals);
+import { SITE as STATIC } from '../data/site';
+const L = STATIC.legal;
 const arrow = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"></path></svg>';
 const needs = ['Branding or a rebrand', 'Social media', 'Photo & video', 'A new website', 'How we talk about ourselves', 'An outside view', 'Content for events', 'Not sure yet'];
 const whens = ['As soon as possible', 'In the next few months', 'Later this year', 'Just exploring'];
@@ -92,12 +94,25 @@ const budgets = ['A one-off project', 'Monthly support', 'Both', 'Not sure yet']
   </div>
   <div class="wrap bottom">
     <span class="biglogo"><img src="/media/logo-white.png" alt="House of Dimah" width="260" height="240" loading="lazy"></span>
+    <div class="fcols">
+    <nav class="fcol" aria-label="Footer">
+      <p class="colhead">Explore</p>
+      {STATIC.footerLinks.map((l) => <a href={l.href}>{l.label}</a>)}
+    </nav>
+    <div class="fcol">
+      <p class="colhead">Services</p>
+      {services.map((s) => <a href={`/services/${s.slug}/`}>{s.name}</a>)}
+    </div>
     <div class="contact">
       <p class="colhead">Say hello</p>
       <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
       <span>{SITE.areas.join(' · ')}</span>
       {(SITE.instagram || SITE.linkedin) && <span class="soc">{SITE.linkedin && <a href={SITE.linkedin} aria-label="LinkedIn"><Fragment set:html={liIcon} /></a>}{SITE.instagram && <a href={SITE.instagram} aria-label="Instagram"><Fragment set:html={igIcon} /></a>}</span>}
     </div>
+    </div>
   </div>
-  <div class="fine"><span>© 2026 House of Dimah</span><span>You stay because it works.</span><a href="/privacy/">Privacy notice</a><a href="/terms/">Website terms</a></div>
+  <div class="fine">
+    <span class="fine-links"><a href="/privacy/">Privacy notice</a><a href="/terms/">Website terms</a><a href="/privacy/#cookies">Cookies</a></span>
+    <span class="fine-co">© 2026 {L.company}. Registered in England and Wales, company number {L.companyNumber}. Registered office: {L.registeredOffice}.</span>
+  </div>
 </footer>

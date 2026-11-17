@@ -8,6 +8,15 @@ export const SITE = {
   // Google Calendar booking page: every Book a call goes here
   bookingUrl: 'https://calendar.app.google/6iVbPHGabS9bqjmo8',
   // Legal details shown on /privacy/ and /terms/. Leave a field empty and the sentence that uses it is left out.
+  // the page links in both footers (main site and client stories)
+  footerLinks: [
+    { href: '/#services', label: 'Services' },
+    { href: '/#method', label: 'How we work' },
+    { href: '/#work', label: 'Client stories' },
+    { href: '/#prices', label: 'Prices' },
+    { href: '/brand-check/', label: 'Dimah Brand Check' },
+    { href: '/#start', label: 'Work with us' },
+  ],
   legal: {
     company: 'House of Dimah Ltd',
     companyNumber: '17578625', // Companies House, incorporated 12 Nov 2026 (England and Wales)
