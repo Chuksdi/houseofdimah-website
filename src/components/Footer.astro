@@ -11,10 +11,12 @@ const liIcon = '<svg viewBox="2.76 2.78 18.2 18.2" fill="currentColor" aria-hidd
 const igIcon = '<svg viewBox="2.1 2.1 19.8 19.8" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4.2"></circle><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"></circle></svg>';
 // on the Brand Check page the audit is the one form, and Email us / Book a call sit under it, so this whole row is left out
 const onBrandCheck = Astro.url.pathname.replace(/\/$/, '') === '/brand-check';
+// the privacy notice and website terms end with just the links and company details, no sales row
+const onLegal = ['/privacy', '/terms'].includes(Astro.url.pathname.replace(/\/$/, ''));
 const budgets = ['A one-off project', 'Monthly support', 'Both', 'Not sure yet'];
 ---
 <footer class="foot" id="contact">
-  {!onBrandCheck && <div class="wrap intake-row">
+  {!onBrandCheck && !onLegal && <div class="wrap intake-row">
   {!onBrandCheck && <div class="cta-band intake" id="start">
     <div class="isteps" aria-hidden="true"><span class="on"></span><span></span><span></span></div>
 
