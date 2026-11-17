@@ -15,13 +15,6 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# TEMPORARY: keep the netlify.app preview out of search engines.
-# Remove this block on the day houseofdimah.co.uk is switched over.
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Robots-Tag = "noindex"
-
 # PREVIEW SITE: the studio-preview branch builds a draft-showing copy for the Studio's
 # Presentation tab (https://studio-preview--houseofdimah.netlify.app). It is always noindex.
 # Its secrets (SANITY_READ_TOKEN, PREVIEW_COOKIE_SECRET) live in Netlify env, never in this repo.
