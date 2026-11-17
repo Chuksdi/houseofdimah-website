@@ -24,7 +24,7 @@ const budgets = ['A one-off project', 'Monthly support', 'Both', 'Not sure yet']
     <form name="start" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="bot-field" id="intake">
       <input type="hidden" name="form-name" value="start">
       <!-- Netlify uses a field called "subject" as the notification email's subject line; site.ts fills in the business name -->
-      <input type="hidden" name="subject" value="ENQUIRY - Website enquiry">
+      <input type="hidden" name="subject" value="Form submission: ENQUIRY">
       <p hidden><label>Leave this empty <input name="bot-field"></label></p>
 
       <fieldset class="istep cur" data-step="1">

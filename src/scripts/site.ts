@@ -116,10 +116,10 @@ if (form) {
     e.preventDefault();
     // bot check: nobody fills three steps within seconds of the page opening. Show the thank-you, send nothing.
     if (Date.now() - loadedAt < 5000) { form.hidden = true; show(4); return; }
-    // email subject for the Netlify notification: ENQUIRY - [business], or their name if no business given
+    // email subject for the Netlify notification: Form submission: ENQUIRY [business], or their name if no business given
     const subj = $<HTMLInputElement>('input[name="subject"]', form);
     const who = ($<HTMLInputElement>('#biz', form)?.value || $<HTMLInputElement>('#nm', form)?.value || '').trim();
-    if (subj) subj.value = `ENQUIRY - ${who || 'Website enquiry'}`;
+    if (subj) subj.value = `Form submission: ENQUIRY ${who}`.trim();
     const body = new URLSearchParams(new FormData(form) as unknown as Record<string, string>).toString();
     try {
       const r = await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body });

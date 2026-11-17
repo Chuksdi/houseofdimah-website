@@ -89,6 +89,8 @@ const description = 'Ten questions that show where your brand is losing people, 
       <div class="aside">
       <form class="form locked" name="brand-audit" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="bot-field" id="bc-form">
         <input type="hidden" name="form-name" value="brand-audit">
+        <!-- Netlify uses a field called "subject" as the notification email's subject line; filled with the business name on submit -->
+        <input type="hidden" name="subject" value="Form submission: BRAND AUDIT">
         <input type="hidden" name="score" id="bc-f-score" value="">
         <input type="hidden" name="answers" id="bc-f-answers" value="">
         <p hidden><label>Leave this empty <input name="bot-field"></label></p>
@@ -187,6 +189,8 @@ const description = 'Ten questions that show where your brand is losing people, 
     const thanks = () => { form.hidden = true; $('#bc-thanks').hidden = false; };
     if (!scored || !$('#bc-f-score').value || Date.now() - loadedAt < 8000) { thanks(); return; }
     if (!form.reportValidity()) return;
+    const who = (form.querySelector('#ba-biz').value || form.querySelector('#ba-name').value || '').trim();
+    form.querySelector('input[name="subject"]').value = ('Form submission: BRAND AUDIT ' + who).trim();
     const btn = form.querySelector('button[type="submit"]'); btn.disabled = true;
     fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(new FormData(form)).toString() })
       .then((r) => { if (!r.ok) throw new Error(); thanks(); })
