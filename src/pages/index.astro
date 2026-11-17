@@ -86,7 +86,7 @@ const days = [
               <h3>{s.name}</h3>
               <p>{s.body}</p>
               <div class="svc-chips">{s.tags.map((t) => <span>{t}</span>)}</div>
-              <a class="svc-more" href={`/services/${s.slug}/`}>More about {s.name.toLowerCase()} <Fragment set:html={arrowUp} /></a>
+              {/* "More about" link removed 17 Nov 2026: it comes back pointing to each service's blog post once the blog exists (CSS .svc-more kept) */}
             </div>
           </>
         ))}
