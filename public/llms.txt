@@ -1,6 +1,6 @@
 # House of Dimah
 
-> House of Dimah is a branding, content and social media marketing team run by Chuks and Kat, working with businesses across London, Hampshire and Dorset. One team handles your brand, content and delivery every month.
+> House of Dimah is a branding, content and social media marketing team run by Chuks and Kat, based in Bournemouth and working with businesses across London, Hampshire and Dorset. One team handles your brand, content and delivery every month.
 
 ## Services
 - [Branding & Rebranding](https://houseofdimah.co.uk/services/branding-and-rebranding/): brand strategy, naming, logo and identity, guidelines, rebrands
@@ -18,4 +18,5 @@
 
 ## Contact
 - Email: hello@houseofdimah.co.uk
+- Based in: Bournemouth
 - Areas: London, Hampshire, Dorset

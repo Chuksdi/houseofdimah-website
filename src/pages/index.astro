@@ -20,6 +20,7 @@ const localBusiness = {
   image: `${SITE.url}/media/logo-black.png`,
   email: settings.email,
   description,
+  address: { '@type': 'PostalAddress', addressLocality: 'Bournemouth', addressRegion: 'Dorset', addressCountry: 'GB' },
   areaServed: settings.areas.map((a) => ({ '@type': 'AdministrativeArea', name: a })),
   parentOrganization: { '@id': `${SITE.url}/#org` },
   hasOfferCatalog: {
