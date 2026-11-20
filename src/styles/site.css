@@ -133,7 +133,7 @@ html[data-mode="light"] .page .hero .mark .vl{display:block}
 
 /* lesson 01: the method */
 .method{position:relative;border-top:1px solid var(--rule);timeline-scope:--s1,--s2,--s3,--s4,--s5;view-timeline-name:--method}
-.method .head{padding:clamp(64px,7vw,110px) 0 clamp(40px,4vw,64px);display:grid;gap:18px}
+.method .head{padding-top:clamp(64px,7vw,110px);padding-bottom:clamp(40px,4vw,64px);display:grid;gap:18px}
 .method .head h2{font-size:clamp(48px,6vw,88px);line-height:.92}
 .method .head p{max-width:52ch;color:var(--mute);font-size:17px}
 .method .cols{display:grid;grid-template-columns:minmax(0,1fr) 236px;border-top:1px solid var(--rule)}
