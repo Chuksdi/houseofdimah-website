@@ -29,7 +29,7 @@ const description = 'Ten questions that show where your brand is losing people, 
       <div>
         <h1>The Dimah <span class="keep">Brand Check</span></h1>
         <p class="lede">Ten questions that show where your brand is losing people, and what to fix first.</p>
-        <p class="meta"><span>About five minutes</span><span>Your score straight away</span><span><i class="d story"></i>Story</span><span><i class="d brand"></i>Brand</span><span><i class="d content"></i>Content</span></p>
+        <p class="meta"><span>About five minutes</span><span>Your score straight away</span><span class="keys"><span><i class="d story"></i>Story</span><span><i class="d brand"></i>Brand</span><span><i class="d content"></i>Content</span></span></p>
       </div>
       <a class="cover" href="/media/house-of-dimah-brand-check-v2.pdf" target="_blank" rel="noopener"><img src="/media/brand-check-cover-v2.jpg" alt="Cover of the printable Dimah Brand Check guide" width="480" height="679"></a>
     </section>
@@ -227,6 +227,8 @@ const description = 'Ten questions that show where your brand is losing people, 
   .lede{font-size:clamp(19px,1.8vw,24px);line-height:1.4;max-width:34ch;margin-top:24px}
   .meta{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:22px;font-size:14px;color:var(--mute)}
   .meta span{display:inline-flex;align-items:center;gap:8px}
+  .meta .keys{display:flex;flex-wrap:nowrap;gap:22px}
+  .meta .d{width:14px;height:14px;flex:none}
   .cover{display:block;border-radius:6px;overflow:hidden;box-shadow:10px 10px 0 var(--orange);justify-self:end;width:100%;max-width:220px}
   .cover img{display:block;width:100%;height:auto}
   .prog{position:sticky;top:var(--navh,107px);z-index:5;background:var(--bg);border-bottom:1px solid var(--rule)}
