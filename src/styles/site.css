@@ -278,7 +278,7 @@ html[data-mode="light"] .page .hero .mark .vl{display:block}
 .icard ol{margin:0;padding-left:20px;display:grid;gap:8px;color:rgba(246,250,254,.68)}
 @media (max-width:640px){.fields{grid-template-columns:minmax(0,1fr)}}
 .page .foot a.btn{color:#0B0B0B}
-.foot .three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;max-width:1100px;padding-left:0;padding-right:0;padding-top:44px;padding-bottom:110px;border-bottom:1px solid rgba(246,250,254,.14)}
+.foot .three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;max-width:1100px;padding-top:44px;padding-bottom:110px;border-bottom:1px solid rgba(246,250,254,.14)}
 .foot h3{font-size:22px;color:#F6FAFE;margin-bottom:6px}
 .foot .three p{font-size:14px;max-width:30ch}
 .foot .bottom{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:28px;padding-top:40px;padding-bottom:36px}
@@ -297,6 +297,12 @@ html[data-mode="light"] .page .hero .mark .vl{display:block}
 .fcols{display:flex;flex-wrap:wrap;align-items:flex-start;gap:28px 56px}
 .fcol{display:grid;gap:4px;font-size:14px;align-content:start}
 .fcol .colhead{font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(246,250,254,.55);margin:0 0 6px}
+.fcol a{text-decoration:none;color:rgba(246,250,254,.8)}.fcol a:hover{color:#F6FAFE}
+/* bottom row (matches V9): same 1100px column as the Brand/Content/Execution row, link columns beside the logo, last links sitting on the logo's bottom edge */
+.foot .bottom{max-width:1100px;align-items:flex-end;flex-wrap:nowrap}
+.foot .bottom .fcols{flex-wrap:nowrap;gap:28px 44px;justify-content:flex-end;margin-bottom:7px}
+.foot .bottom .contact span:not(.soc){max-width:24ch;margin-left:auto}
+@media (max-width:980px){.foot .bottom{flex-wrap:wrap}.foot .bottom .fcols{flex-wrap:wrap;justify-content:flex-start;margin-bottom:0}.foot .bottom .contact span:not(.soc){margin-left:0}}
 .inner.legal h2[id]{scroll-margin-top:96px}
 @media (max-width:860px){.method .cols{grid-template-columns:minmax(0,1fr)}.side{display:none}.step{grid-template-columns:minmax(0,1fr)}.step .ph{min-height:360px}.ta,.tb,.tc,.td{grid-column:1/-1;margin-top:0}.foot .three{grid-template-columns:minmax(0,1fr)}.contact{text-align:left}.fcols{gap:28px 40px}}
 
@@ -421,7 +427,6 @@ html.js .idone.cur{display:grid}
 .tile:focus-visible{outline:2px solid var(--fg);outline-offset:6px;border-radius:6px}
 @media (prefers-reduced-motion:reduce){.tile,.tile .shot,.tile b,.hod-cursor-zone.cursor-on .badge{transition:none}}
 /* footer form and columns keep the usual side margin once the screen is narrower than their 1040px width */
-@media (max-width:1180px){.foot .three{padding-left:clamp(20px,4vw,72px);padding-right:clamp(20px,4vw,72px)}}
 
 /* ---- ported from V9, 14 Nov 2026 ---- */
 /* hero fills the whole first screen; the nav comes in just below it */
