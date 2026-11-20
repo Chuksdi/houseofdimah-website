@@ -29,7 +29,7 @@ const ig = '<svg viewBox="2.1 2.1 19.8 19.8" fill="none" stroke="currentColor" s
       <p class="cf-head">Say hello</p>
       <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
       <a href={`tel:${STATIC.phoneIntl}`}>{STATIC.phone}</a>
-      <span>Based in Bournemouth, working across {SITE.areas.slice(0, -1).join(', ')} and {SITE.areas.at(-1)}</span>
+      <span>{SITE.areas.join(' · ')}</span>
       {(SITE.instagram || SITE.linkedin) && <span class="cf-soc">{SITE.linkedin && <a href={SITE.linkedin} aria-label="LinkedIn"><Fragment set:html={li} /></a>}{SITE.instagram && <a href={SITE.instagram} aria-label="Instagram"><Fragment set:html={ig} /></a>}</span>}
     </div>
     </div>

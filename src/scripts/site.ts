@@ -54,30 +54,55 @@ tiles.forEach((t) => t.addEventListener('click', () => {
 }));
 $$('[data-svc-close]').forEach((b) => b.addEventListener('click', closeAll));
 
-// reels: the rail drifts right to left on its own, stops while the mouse is on it (or for 3s after a swipe),
-// and loops seamlessly onto the copies at the end. The later reels only play once they're on screen.
+// reels (matches V9): the rail drifts right to left on its own. Any touch, swipe, trackpad, wheel or drag hands control
+// to the visitor instantly (snapping back on, no tug of war); a few seconds after they stop, the drift eases back in.
+// The drift moves whole pixels by scrolling and the leftover fraction by transform, so it glides evenly.
 const rail = $('#reelrail');
 if (rail && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  rail.classList.add('auto');
-  const SPEED = 38; // px per second
-  let hover = false, seen = true, last = 0, speed = 0, pos = rail.scrollLeft, hold = 0;
+  const SPEED = 38;   // px per second
+  const IDLE = 3500;  // ms after the last interaction before the drift resumes
+  let hover = false, seen = true, last = 0, speed = 0, pos = rail.scrollLeft, userUntil = 0, auto = false;
+  let settleT: ReturnType<typeof setTimeout> | undefined;
   const loopW = () => { const a = $('.rc', rail), c = $('.rc.clone', rail); return a && c ? c.offsetLeft - a.offsetLeft : 0; };
-  const step = (t: number) => {
-    const dt = last ? Math.min(t - last, 64) / 1000 : 0; last = t;
-    const go = seen && !hover && Date.now() > hold;
-    speed += ((go ? SPEED : 0) - speed) * Math.min(1, dt * 2.5); // eases up to speed and back down to a stop
-    if (speed > 0.5) {
-      pos += speed * dt;
-      const w = loopW(); if (w && pos >= w) pos -= w;
-      rail.scrollLeft = pos;
-    } else pos = rail.scrollLeft; // stopped: follow wherever the visitor scrolled to
-    requestAnimationFrame(step);
+  const setAuto = (on: boolean) => {
+    if (on === auto) return;
+    auto = on;
+    rail.classList.toggle('auto', on);
+    if (!on) rail.style.setProperty('--sub', '0px');
   };
+  const jumpTo = (x: number) => { // instant, never animated
+    const prev = rail.style.scrollBehavior; rail.style.scrollBehavior = 'auto';
+    rail.scrollLeft = x; rail.style.scrollBehavior = prev; pos = rail.scrollLeft;
+  };
+  const takeOver = () => { userUntil = Date.now() + IDLE; speed = 0; setAuto(false); };
+  ['wheel', 'touchstart', 'pointerdown'].forEach((ev) => rail.addEventListener(ev, takeOver, { passive: true }));
   rail.addEventListener('pointerenter', (e) => { if ((e as PointerEvent).pointerType === 'mouse') hover = true; });
   rail.addEventListener('pointerleave', (e) => { if ((e as PointerEvent).pointerType === 'mouse') hover = false; });
-  const holdOn = () => { hold = Date.now() + 3000; };
-  rail.addEventListener('touchstart', holdOn, { passive: true });
-  rail.addEventListener('touchmove', holdOn, { passive: true });
+  rail.addEventListener('scroll', () => {
+    if (auto) return;
+    userUntil = Math.max(userUntil, Date.now() + 1500); // still coasting from a swipe: keep waiting
+    // once the visitor's scroll settles, wrap round seamlessly so there's no dead end in either direction
+    clearTimeout(settleT);
+    settleT = setTimeout(() => {
+      const w = loopW(); if (!w) return;
+      const x = rail.scrollLeft;
+      if (x >= w) jumpTo(x - w); else if (x <= 1) jumpTo(x + w);
+    }, 180);
+  }, { passive: true });
+  const step = (t: number) => {
+    const dt = last ? Math.min(t - last, 64) / 1000 : 0; last = t;
+    if (Date.now() < userUntil) speed = 0;
+    else speed += ((seen && !hover ? SPEED : 0) - speed) * Math.min(1, dt * 1.5); // eases in and out gently
+    if (speed > 0.5) {
+      if (!auto) { pos = rail.scrollLeft; setAuto(true); }
+      pos += speed * dt;
+      const w = loopW(); if (w && pos >= w) pos -= w;
+      const whole = Math.floor(pos);
+      if (rail.scrollLeft !== whole) rail.scrollLeft = whole;
+      rail.style.setProperty('--sub', (whole - pos).toFixed(3) + 'px');
+    } else if (!auto) pos = rail.scrollLeft; // visitor in control: follow wherever they scrolled to
+    requestAnimationFrame(step);
+  };
   if ('IntersectionObserver' in window) new IntersectionObserver((es) => es.forEach((e) => { seen = e.isIntersecting; })).observe(rail);
   requestAnimationFrame(step);
 }

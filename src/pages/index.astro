@@ -43,7 +43,7 @@ const steps = [
 const days = [
   ['Day 1', 'Welcome', 'Agreement signed, a direct line to the team, access to your accounts.'],
   ['Week 1', 'Discovery', 'We interview you and your team and walk your business.'],
-  ['Week 2', 'The plan', 'A three-month plan, presented by Chuks and Kat for sign-off.'],
+  ['Week 2', 'The plan', 'A three-month plan, presented for sign-off.'],
   ['Week 3', 'Create', 'The first pieces get made: a shoot, a design, a page. Every detail planned with you in mind.'],
   ['Week 4', 'Live', 'The first work goes out, then the rhythm begins.'],
 ];
@@ -85,7 +85,7 @@ const days = [
             </button>
             <div class="svc-pop" id={`svc-${i}`} role="region" aria-label={s.name} hidden>
               <button class="svc-close" type="button" aria-label="Close" data-svc-close><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"></path></svg></button>
-              <h3>{s.name}</h3>
+              <h3 class={s.name.startsWith('Website') ? 'wide' : undefined}>{s.name.replace('Website Design', 'Website\nDesign')}</h3>
               <p>{s.body}</p>
               <div class="svc-chips">{s.tags.map((t) => <span>{t}</span>)}</div>
               <a class="svc-more" href={`/services/${s.slug}/`}>More about {s.name.toLowerCase()} <Fragment set:html={arrowUp} /></a>
@@ -194,7 +194,7 @@ const days = [
 
   <section class="days">
     <div class="wrap" style="display:grid;gap:36px">
-      <h2>From hello to first work live in 30 days.</h2>
+      <h2>From hello to first work live in 30&nbsp;days.</h2>
       <div class="tl">
         {days.map((d) => <div><b>{d[0]}</b><strong>{d[1]}</strong><span>{d[2]}</span></div>)}
       </div>
@@ -209,7 +209,6 @@ const days = [
         <div class="tier mid"><h3 class="h4">In-house</h3><span class="p">from £2,500<span style="font-size:18px">/mo</span></span><span class="tm">Monthly, rolling</span><ul><li>Brand, content and delivery, ongoing</li><li>Shoot days planned around you</li><li>Regular strategy calls</li></ul><a class="btn" href={SITE.bookingUrl} target="_blank" rel="noopener">Ask about In-house</a></div>
         <div class="tier"><h3 class="h4">Group</h3><span class="p">Bespoke</span><span class="tm">For multi-site businesses</span><ul><li>One brand across every site</li><li>Shoots across your locations</li><li>Planning days with your team</li></ul><a class="btn ghost" href={SITE.bookingUrl} target="_blank" rel="noopener">Ask about Group</a></div>
       </div>
-      <a class="lm-link" href={SITE.bookingUrl} target="_blank" rel="noopener">Or book a call <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"></path></svg></a>
     </div>
   </section>
 </Base>
