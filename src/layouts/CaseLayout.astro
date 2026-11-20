@@ -44,6 +44,8 @@ const blocks = [ORG_SCHEMA, crumbSchema];
   <link rel="stylesheet" href="/fonts/fonts.css">
   {blocks.map((b) => <script type="application/ld+json" set:html={JSON.stringify(b)} />)}
   <slot name="head" />
+  <!-- no sideways wobble on phones while the hero image zooms in -->
+  <style is:inline>html,body{overflow-x:clip}</style>
 </head>
 <body>
   <slot />

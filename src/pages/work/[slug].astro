@@ -1,5 +1,4 @@
 ---
-import Base from '../../layouts/Base.astro';
 import CaseLayout from '../../layouts/CaseLayout.astro';
 import { getContent } from '../../lib/content';
 import CASE_META from '../../data/cases/meta.json';
@@ -39,16 +38,15 @@ const crumbs = [{ name: 'Client stories', path: '/#work' }, { name: c.name, path
     </>}
   </CaseLayout>
 ) : (
-  <Base title={title} description={description} breadcrumbs={crumbs}>
-    <article class="inner">
-      <div class="wrap">
-        <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/#work">Client stories</a> / <span aria-current="page">{c.name}</span></nav>
-        <h1>{c.name}</h1>
-        <p class="tags-line">{c.tags.join(' · ')}</p>
-        <img class={`case-hero ${c.fit ? 'fit' : ''}`} src={c.img} alt={c.alt} style={c.colour ? `background:${c.colour}` : undefined}>
-        <p class="lede">{c.summary || 'The full story is on its way.'}</p>
-        <a class="btn" href="/#start">Start here</a>
-      </div>
-    </article>
-  </Base>
+  <CaseLayout title={title} description={description} image={c.img} breadcrumbs={crumbs}>
+    <style is:inline slot="head">{`body{margin:0;background:#0B0B0B;color:#F6FAFE;font-family:"Saira","Helvetica Neue",Arial,sans-serif}.fb{max-width:880px;margin:0 auto;padding:96px clamp(20px,4vw,72px);display:grid;gap:20px}.fb a{color:inherit}.fb h1{font-family:"Funnel Display","Helvetica Neue",Arial,sans-serif;font-weight:800;font-size:clamp(40px,6vw,80px);line-height:.95;margin:0}.fb img{width:100%;border-radius:6px}`}</style>
+    <main class="fb">
+      <p><a href="/">Home</a> / <a href="/#work">Client stories</a> / {c.name}</p>
+      <h1>{c.name}</h1>
+      <p>{c.tags.join(' · ')}</p>
+      <img src={c.img} alt={c.alt} style={c.colour ? `background:${c.colour}` : undefined}>
+      <p>{c.summary || 'The full story is on its way.'}</p>
+      <p><a href="/#start">Start here</a></p>
+    </main>
+  </CaseLayout>
 )}
