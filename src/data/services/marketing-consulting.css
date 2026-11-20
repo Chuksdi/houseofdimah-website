@@ -1,0 +1,83 @@
+.sv-hero{padding:clamp(56px,7vw,104px) 0 clamp(48px,6vw,88px)}
+.sv-hero-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(32px,5vw,80px);align-items:center}
+.sv-hero-txt{display:grid;gap:24px;justify-items:start}
+.sv-hero h1{font-size:clamp(40px,5vw,80px);line-height:.95;max-width:16ch;margin:0}
+.sv-hero .lede{font-size:clamp(19px,1.6vw,23px);line-height:1.45;max-width:46ch}
+.sv-acts{display:flex;flex-wrap:wrap;gap:12px}
+.sv-upd{font-size:13px;color:var(--mute)}
+.sv-photo{margin:0;border-radius:6px;overflow:hidden;aspect-ratio:4/5}
+.sv-photo img{display:block;width:100%;height:100%;object-fit:cover}
+.sv-sec{padding:clamp(56px,7vw,104px) 0;border-top:1px solid var(--rule)}
+.sv-sec h2{font-size:clamp(30px,3.4vw,52px);line-height:1;margin:0;max-width:14ch}
+.sv-sec h3{font-size:22px;line-height:1.1;margin:0;font-family:var(--display);font-weight:800;letter-spacing:-.02em}
+.sv-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:clamp(32px,5vw,80px);align-items:start}
+.sv-signs{list-style:none;margin:0;padding:0;display:grid;border-top:1px solid var(--rule)}
+.sv-signs li{padding:18px 0 18px 34px;border-bottom:1px solid var(--rule);font-size:19px;line-height:1.4;position:relative}
+.sv-signs li::before{content:"";position:absolute;left:4px;top:27px;width:14px;height:2px;background:#FF5B23}
+.sv-get{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:40px}
+.sv-get div{background:var(--card);border-radius:6px;padding:28px;display:grid;gap:10px;align-content:start}
+.sv-get p{font-size:16px;color:var(--mute)}
+/* inline link to the Brand Check: brand orange, no underline */
+.page a.sv-inline-link{color:#FF5B23;text-decoration:none;font-weight:inherit}
+.page a.sv-inline-link:hover,.page a.sv-inline-link:focus-visible{color:#FF5B23;text-decoration:none}
+/* light mode only: same grey as the sentence, in bold */
+html[data-mode="light"] .page a.sv-inline-link,html[data-mode="light"] .page a.sv-inline-link:hover,html[data-mode="light"] .page a.sv-inline-link:focus-visible{color:inherit;font-weight:700}
+/* light mode only: What you get cards in the same pale aqua as the home page testimonials */
+html[data-mode="light"] .page .sv-get div{background:#E8F8FA}
+.sv-intro{margin-top:16px!important;font-size:18px;color:var(--mute);max-width:52ch}
+.sv-steps{list-style:none;margin:40px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}
+.sv-steps li{display:grid;gap:10px;align-content:start;padding-top:18px;border-top:2px solid var(--fg)}
+.sv-steps b{font-family:var(--display);font-weight:800;font-size:22px;line-height:1;color:#788CE3}
+.sv-steps p{font-size:15px;color:var(--mute)}
+.sv-proof{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,5vw,80px);align-items:center}
+.page a.sv-case{display:grid;gap:18px;text-decoration:none;color:var(--fg)}
+.sv-case img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:6px;background:#F0E040}
+.sv-logo{display:grid;place-items:center;width:100%;aspect-ratio:16/10;border-radius:6px;background:#292961}
+.sv-logo svg{height:62%;width:auto}
+.sv-case-t{display:grid;gap:8px}
+.sv-case-t b{font-family:var(--display);font-size:26px;letter-spacing:-.02em}
+.sv-case-t>span{color:var(--mute)}
+.page .sv-case .sv-more{display:inline-flex;align-items:center;gap:8px;color:var(--fg);font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.sv-more svg{width:16px;height:16px}
+.sv-quote{margin:0;display:grid;gap:20px}
+.sv-quote p{font-family:var(--display);font-weight:800;font-size:clamp(24px,2.4vw,36px);line-height:1.15;letter-spacing:-.02em}
+.sv-quote footer{font-size:14px;color:var(--mute)}
+.sv-price{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(32px,5vw,80px);align-items:center}
+.sv-price>div:first-child{display:grid;gap:16px}
+.sv-price p{font-size:18px;max-width:46ch}
+.sv-price-card{background:var(--card);border-radius:6px;padding:36px;display:grid;gap:12px;justify-items:start}
+.sv-price-n{font-family:var(--display);font-weight:800;font-size:clamp(40px,4vw,64px);line-height:1;letter-spacing:-.03em}
+.sv-price-card>span:nth-child(2){color:var(--mute)}
+.sv-price-card .btn{margin-top:12px}
+/* light mode only: price card in the same pale aqua as the testimonials */
+html[data-mode="light"] .page .sv-price-card{background:#E8F8FA}
+.sv-faq{display:grid;border-top:1px solid var(--rule)}
+.sv-faq details{border-bottom:1px solid var(--rule);padding:4px 0}
+.sv-faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;min-height:56px;font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:-.01em}
+.sv-faq summary::-webkit-details-marker{display:none}
+.sv-faq summary::after{content:"+";font-size:26px;font-weight:700;color:#FF5B23;transition:transform .5s var(--ramp)}
+.sv-faq details[open] summary::after{transform:rotate(45deg)}
+.sv-faq details p{padding:0 0 20px;font-size:17px;color:var(--mute);max-width:60ch}
+.page .sv-faq a{text-decoration:underline;text-decoration-color:#FF5B23;text-underline-offset:3px}
+/* Brand Check links: never underlined, including inside the FAQ */
+.page .sv-faq a.sv-inline-link,.page .sv-faq a.sv-inline-link:hover{text-decoration:none}
+.sv-team{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.sv-team div{background:var(--card);border-radius:6px;padding:28px;display:grid;gap:10px;align-content:start}
+/* light mode only: team cards in the same pale aqua as the testimonials */
+html[data-mode="light"] .page .sv-team div{background:#E8F8FA}
+.ph{color:#FF5B23}
+@media (max-width:860px){.sv-hero-grid,.sv-split,.sv-proof,.sv-price{grid-template-columns:minmax(0,1fr)}.sv-get{grid-template-columns:minmax(0,1fr)}.sv-steps{grid-template-columns:minmax(0,1fr)}.sv-team{grid-template-columns:minmax(0,1fr)}.sv-photo{aspect-ratio:4/3}}
+/* service page (matches the live /services/<slug>/ pages) */
+.inner{padding:clamp(72px,8vw,120px) 0}
+.inner .wrap{display:grid;gap:24px;justify-items:start}
+.inner h1{font-size:clamp(44px,6vw,92px);line-height:.95;max-width:16ch;margin:0}
+.inner h2{font-size:clamp(28px,3vw,44px);line-height:1;margin:0}
+.inner .lede{font-size:clamp(19px,1.7vw,24px);line-height:1.45;max-width:52ch}
+.inner .where{color:var(--mute)}
+.crumbs{font-size:12.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.crumbs a{text-decoration:none}
+.svc-chips.plain{list-style:none;margin:0;padding:0}
+.inner.more{border-top:1px solid var(--rule)}
+.others{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px 28px}
+.page .others a{font-family:var(--display);font-weight:800;font-size:22px;text-decoration:none}
+.page .others a:hover{text-decoration:underline}

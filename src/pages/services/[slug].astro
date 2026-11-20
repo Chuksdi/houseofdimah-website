@@ -3,6 +3,10 @@ import Base from '../../layouts/Base.astro';
 import { SITE } from '../../data/site';
 import { getContent } from '../../lib/content';
 
+// Full service pages, built from the Service boards on the Site Board (src/data/services/<slug>.html + .css)
+const pageHtml = import.meta.glob('../../data/services/*.html', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
+const pageCss = import.meta.glob('../../data/services/*.css', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
+
 export async function getStaticPaths() {
   const { services } = await getContent();
   return services.map((s) => ({ params: { slug: s.slug } }));
@@ -12,34 +16,55 @@ const { services, settings } = await getContent(Astro.locals);
 const s = services.find((o) => o.slug === Astro.params.slug);
 if (!s) return Astro.rewrite('/404/');
 const others = services.filter((o) => o.slug !== s.slug);
-const title = `${s.name} | London, Hampshire, Dorset`;
-const description = `${s.body.split('. ')[0]}. ${s.name} from House of Dimah, for businesses across London, Hampshire and Dorset.`;
+const body = pageHtml[`../../data/services/${s.slug}.html`];
+const css = pageCss[`../../data/services/${s.slug}.css`];
+
+const strip = (h: string) => h.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&#x27;|&#39;/g, "'").replace(/&quot;/g, '"').replace(/\s+/g, ' ').trim();
+const h1 = body ? strip(body.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)?.[1] ?? s.name) : s.name;
+const lede = body ? strip(body.match(/<p class="lede">([\s\S]*?)<\/p>/)?.[1] ?? s.body) : s.body;
+// the board's H1 as the title, with '&' so it stays under 65 characters
+const title = body ? h1.replace(' and Dorset', ' & Dorset') : `${s.name} | London, Hampshire, Dorset`;
+const description = body ? lede.split(/(?<=\.)\s/)[0] + ' Based in Bournemouth, working across London, Hampshire and Dorset.' : `${s.body.split('. ')[0]}. ${s.name} from House of Dimah, for businesses across London, Hampshire and Dorset.`;
+const faqs = body ? [...body.matchAll(/<summary>([\s\S]*?)<\/summary><p>([\s\S]*?)<\/p>/g)].map((m) => ({ q: strip(m[1]), a: strip(m[2]) })) : [];
+
 const serviceSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   name: s.name,
   serviceType: s.name,
-  description: s.body,
+  description: body ? lede : s.body,
   url: `${SITE.url}/services/${s.slug}/`,
   provider: { '@id': `${SITE.url}/#org` },
   areaServed: settings.areas.map((a) => ({ '@type': 'AdministrativeArea', name: a })),
 };
+const faqSchema = faqs.length ? [{
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+}] : [];
 ---
-<Base title={title} description={description} schema={[serviceSchema]} breadcrumbs={[{ name: 'Services', path: '/#services' }, { name: s.name, path: `/services/${s.slug}/` }]}>
-  <article class="inner">
-    <div class="wrap">
-      <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/#services">Services</a> / <span aria-current="page">{s.name}</span></nav>
-      <h1>{s.name}</h1>
-      <p class="lede">{s.body}</p>
-      <ul class="svc-chips plain">{s.tags.map((t) => <li><span>{t}</span></li>)}</ul>
-      <p class="where">Based in Bournemouth, working across London, Hampshire and Dorset.</p>
-      <a class="btn" href="/#start">Start here</a>
-    </div>
-  </article>
-  <section class="inner more">
-    <div class="wrap">
-      <h2>Other services</h2>
-      <ul class="others">{others.map((o) => <li><a href={`/services/${o.slug}/`}>{o.name}</a></li>)}</ul>
-    </div>
-  </section>
+<Base title={title} description={description} schema={[serviceSchema, ...faqSchema]} breadcrumbs={[{ name: 'Services', path: '/#services' }, { name: s.name, path: `/services/${s.slug}/` }]}>
+  {css && <style is:inline slot="head" set:html={css}></style>}
+  {body ? (
+    <Fragment set:html={body} />
+  ) : (
+    <>
+      <article class="inner">
+        <div class="wrap">
+          <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/#services">Services</a> / <span aria-current="page">{s.name}</span></nav>
+          <h1>{s.name}</h1>
+          <p class="lede">{s.body}</p>
+          <ul class="svc-chips plain">{s.tags.map((t) => <li><span>{t}</span></li>)}</ul>
+          <p class="where">Based in Bournemouth, working across London, Hampshire and Dorset.</p>
+          <a class="btn" href="/#start">Start here</a>
+        </div>
+      </article>
+      <section class="inner more">
+        <div class="wrap">
+          <h2>Other services</h2>
+          <ul class="others">{others.map((o) => <li><a href={`/services/${o.slug}/`}>{o.name}</a></li>)}</ul>
+        </div>
+      </section>
+    </>
+  )}
 </Base>

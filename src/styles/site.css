@@ -358,6 +358,7 @@ html[data-mode="light"] .logo .logo-l{display:block}
 .svc-pop[hidden]{display:none}
 .svc-more{justify-self:start;display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border-bottom:1.5px solid currentColor;padding-bottom:4px}
 .svc-more svg{width:14px;height:14px}
+.svc-more.svc-start{border-bottom-color:#FF5B23;border-bottom-width:2px}
 .page .svc-pop a{color:inherit}
 /* intake: real form controls under the chip look */
 .intake form{display:grid}
