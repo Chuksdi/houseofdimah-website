@@ -112,7 +112,7 @@ const budgets = ['A one-off project', 'Monthly support', 'Both', 'Not sure yet']
       <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
       <a href={`tel:${STATIC.phoneIntl}`}>{STATIC.phone}</a>
       <span>{SITE.areas.join(' · ')}</span>
-      {(SITE.instagram || SITE.linkedin) && <span class="soc">{SITE.linkedin && <a href={SITE.linkedin} aria-label="LinkedIn"><Fragment set:html={liIcon} /></a>}{SITE.instagram && <a href={SITE.instagram} aria-label="Instagram"><Fragment set:html={igIcon} /></a>}</span>}
+      {(SITE.instagram || SITE.linkedin) && <span class="soc">{SITE.linkedin && <a href={SITE.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn"><Fragment set:html={liIcon} /></a>}{SITE.instagram && <a href={SITE.instagram} target="_blank" rel="noopener" aria-label="Instagram"><Fragment set:html={igIcon} /></a>}</span>}
     </div>
     </div>
   </div>

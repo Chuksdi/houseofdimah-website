@@ -30,7 +30,7 @@ const ig = '<svg viewBox="2.1 2.1 19.8 19.8" fill="none" stroke="currentColor" s
       <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
       <a href={`tel:${STATIC.phoneIntl}`}>{STATIC.phone}</a>
       <span>{SITE.areas.join(' · ')}</span>
-      {(SITE.instagram || SITE.linkedin) && <span class="cf-soc">{SITE.linkedin && <a href={SITE.linkedin} aria-label="LinkedIn"><Fragment set:html={li} /></a>}{SITE.instagram && <a href={SITE.instagram} aria-label="Instagram"><Fragment set:html={ig} /></a>}</span>}
+      {(SITE.instagram || SITE.linkedin) && <span class="cf-soc">{SITE.linkedin && <a href={SITE.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn"><Fragment set:html={li} /></a>}{SITE.instagram && <a href={SITE.instagram} target="_blank" rel="noopener" aria-label="Instagram"><Fragment set:html={ig} /></a>}</span>}
     </div>
     </div>
   </div>
