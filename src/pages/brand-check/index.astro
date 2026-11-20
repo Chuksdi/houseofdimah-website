@@ -56,7 +56,7 @@ const description = 'Ten questions that show where your brand is losing people, 
       <div class="wrap">
         <div class="head">
           <p class="big"><span id="bc-score">0</span><small>/ 20</small></p>
-          <div class="band"><h2 id="bc-band"></h2><p id="bc-band-text"></p></div>
+          <div class="verdict"><h2 id="bc-band"></h2><p id="bc-band-text"></p></div>
         </div>
         <div class="areas">
           {Object.entries(AREAS).map(([k, name]) => (
@@ -257,8 +257,10 @@ const description = 'Ten questions that show where your brand is losing people, 
   .res .head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:40px;align-items:end}
   .big{font-family:var(--display);font-weight:800;font-size:clamp(88px,11vw,152px);line-height:.85;letter-spacing:-.05em;font-variant-numeric:tabular-nums}
   .big small{font-size:.32em;color:var(--mute);letter-spacing:-.02em;margin-left:6px}
-  .band h2{font-size:clamp(32px,3.6vw,48px);line-height:1}
-  .band p{margin-top:12px;font-size:18px;max-width:48ch;opacity:.82}
+  .verdict h2{font-size:clamp(32px,3.6vw,48px);line-height:1;text-wrap:balance}
+  .verdict p{margin-top:12px;font-size:18px;line-height:1.5;max-width:48ch;opacity:.82}
+  /* phones: the score on top, the verdict underneath, full width */
+  @media (max-width:640px){.res .head{grid-template-columns:minmax(0,1fr);gap:28px;align-items:start}.verdict h2{font-size:34px}.verdict p{font-size:17px}}
   .areas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:48px}
   .area{display:grid;gap:10px}
   .area .row{display:flex;justify-content:space-between;font-size:14px;font-weight:600}
