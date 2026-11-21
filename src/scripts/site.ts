@@ -191,3 +191,27 @@ if (form) {
     window.addEventListener('scroll', () => update(null), { passive: true });
   }
 }
+
+// House Method rail: browsers without scroll-driven animations (Safari before 26, e.g. many iPads)
+// light each number from scroll position instead, using the same 35%-65% cover window as the CSS.
+{
+  const rail = $$('.rail span');
+  const stepEls = $$('.method .step');
+  const native = typeof CSS !== 'undefined' && CSS.supports('animation-timeline', 'view()');
+  if (!native && rail.length && rail.length === stepEls.length) {
+    let ticking = false;
+    const paint = () => {
+      ticking = false;
+      const vh = window.innerHeight;
+      stepEls.forEach((s, i) => {
+        const r = s.getBoundingClientRect();
+        const p = (vh - r.top) / (vh + r.height);
+        rail[i].classList.toggle('lit', p >= 0.35 && p <= 0.65);
+      });
+    };
+    const req = () => { if (!ticking) { ticking = true; requestAnimationFrame(paint); } };
+    window.addEventListener('scroll', req, { passive: true });
+    window.addEventListener('resize', req);
+    paint();
+  }
+}

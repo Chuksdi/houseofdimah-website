@@ -41,7 +41,7 @@ const description = 'Ten questions that show where your brand is losing people, 
         <fieldset class="q" data-q={i} data-area={q.area}>
           <legend class="sr">Question {i + 1}</legend>
           <span class="n">{String(i + 1).padStart(2, '0')}</span>
-          <div><h2>{q.q}<i class={`d ${q.area}`} aria-hidden="true"></i></h2><p>{q.hint}</p></div>
+          <div><h2>{q.q.split(' ').slice(0, -1).join(' ')} <span class="tail">{q.q.split(' ').at(-1)}<i class={`d ${q.area}`} aria-hidden="true"></i></span></h2><p>{q.hint}</p></div>
           <div class="opts">
             <label class="opt"><input type="radio" name={`q${i}`} value="2"><span>Yes</span></label>
             {!q.noSome && <label class="opt"><input type="radio" name={`q${i}`} value="1"><span>Sometimes</span></label>}
@@ -242,6 +242,7 @@ const description = 'Ten questions that show where your brand is losing people, 
   .q.done .n{color:var(--fg)}
   .q h2{font-size:22px;line-height:1.2;letter-spacing:-.015em}
   .q h2 .d{margin-left:10px;vertical-align:middle}
+  .q h2 .tail{white-space:nowrap}
   .q p{margin-top:6px;font-size:15px;color:var(--mute);max-width:56ch}
   .opts{display:flex;gap:8px}
   .opt{position:relative;cursor:pointer}
@@ -315,6 +316,7 @@ const description = 'Ten questions that show where your brand is losing people, 
     .q{grid-template-columns:40px minmax(0,1fr)}.opts{grid-column:1/-1}.opt{flex:1}.opt span{width:100%;min-width:0}
     .res .head{grid-template-columns:minmax(0,1fr)}.areas{grid-template-columns:minmax(0,1fr)}
     .fixes :global(li){grid-template-columns:40px minmax(0,1fr)}.fixes :global(li small){grid-column:2}
+    .ah{max-width:none;text-wrap:balance}
     .audit{grid-template-columns:minmax(0,1fr)}.two{grid-template-columns:minmax(0,1fr)}
   }
   @media (prefers-reduced-motion:reduce){.bar span,.track .d,.opt span{transition:none}}
