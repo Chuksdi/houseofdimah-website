@@ -25,7 +25,7 @@ export const SITE = {
     companyNumber: '17578625', // Companies House, incorporated 12 Nov 2026 (England and Wales)
     registeredOffice: '', // kept off the site on purpose (2026-11-21)
     icoNumber: 'ZC303084', // ICO registration number (application C2087679, paid 14 Nov 2026)
-    updated: '16 November 2026',
+    updated: '26 November 2026',
   },
   areas: ['London', 'Hampshire', 'Dorset'],
   // TODO: real profile links before launch (V9 still has them as "#")
