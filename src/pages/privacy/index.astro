@@ -4,6 +4,7 @@ import { SITE } from '../../data/site';
 // DRAFT for Chuks and Kat to review. Plain-English privacy notice for the website.
 // Facts it relies on (keep in step if the site changes): Netlify hosting + Netlify Forms ("start", "brand-audit"),
 // Brand Check answers stay in the browser unless an audit is requested, results PDF made on the device,
+// client project pages + voice notes (Netlify, Whisper locally, Claude summaries; recordings deleted within 90 days),
 // Google Calendar booking page, images served from Sanity's CDN, fonts self-hosted, no analytics, no ad trackers.
 const L = SITE.legal;
 const title = 'Privacy notice | House of Dimah';
@@ -28,13 +29,16 @@ const description = 'How House of Dimah collects, uses and looks after personal 
       <p>If you ask for a bespoke audit, we receive your name, business, email address, website or Instagram, anything you add in the note, and your Brand Check score and answers, so we can prepare your audit.</p>
       <h3>When you email us or book a call</h3>
       <p>Whatever you choose to include in your email. If you book a call, the booking page is run by Google (Google Calendar appointment scheduling): you give your name, email address and any notes to Google, and the booking comes through to our calendar.</p>
+      <h3>When you work with us as a client</h3>
+      <p>We may give you a private project page where you can listen to updates, tick off next steps and send us a voice note. When you use it, we receive your ticks and any answers you choose, when you opened the page and played an update, and any voice recordings you send. You may also send us voice notes by WhatsApp.</p>
+      <p>We turn voice notes into text on our own computer, then use an AI assistant (Claude, made by Anthropic) to summarise the decisions and next steps so nothing you tell us gets missed. A person at House of Dimah always reads the summary and replies to you. We do not use your voice to identify you, and we do not use your recordings or transcripts to train AI.</p>
       <h3>When you visit the website</h3>
       <p>Like every website, our host (Netlify) keeps basic technical logs: your IP address, browser type, the pages you request and when. Some images load from our content service (Sanity), which sees the same kind of request information. We do not use analytics, advertising or tracking tools, and we do not build profiles of visitors.</p>
 
       <h2>Why we use it, and on what basis</h2>
       <ul>
         <li><strong>To reply to you and talk about working together.</strong> When you send a form, request an audit or book a call, we use your details to respond, to prepare your audit or call, and to send you a plan if you ask for one. Basis: taking steps at your request before a possible contract, and our legitimate interest in answering enquiries.</li>
-        <li><strong>To run the work we do for you</strong>, if you become a client. Basis: our contract with you.</li>
+        <li><strong>To run the work we do for you</strong>, if you become a client, including your project page, voice notes and their transcripts. Basis: our contract with you.</li>
         <li><strong>To keep the website working and secure</strong>, using the technical logs above. Basis: our legitimate interest in running a safe, reliable website.</li>
         <li><strong>To meet our legal duties</strong>, for example keeping business and tax records. Basis: legal obligation.</li>
       </ul>
@@ -43,7 +47,9 @@ const description = 'How House of Dimah collects, uses and looks after personal 
       <h2>Who we share it with</h2>
       <p>Only the services that help us run the website and our business, under contracts that require them to protect it:</p>
       <ul>
-        <li><strong>Netlify</strong>: hosts the website and receives form submissions and audit requests.</li>
+        <li><strong>Netlify</strong>: hosts the website and client project pages, and receives form submissions, audit requests, client replies and voice notes.</li>
+        <li><strong>Anthropic</strong>: provides the AI assistant (Claude) we use to summarise client voice-note transcripts, under business terms that do not allow it to train its models on them.</li>
+        <li><strong>WhatsApp (Meta)</strong>: if you choose to message or send voice notes to us there.</li>
         <li><strong>Google</strong>: our email, calendar and booking page (Google Workspace).</li>
         <li><strong>Sanity</strong>: stores and serves some of the website's content and images.</li>
       </ul>
@@ -54,6 +60,7 @@ const description = 'How House of Dimah collects, uses and looks after personal 
       <ul>
         <li>Enquiries, audit requests and related emails: up to two years after we last heard from you, unless you become a client.</li>
         <li>Client records: for as long as we work together and then six years, to meet tax and legal requirements.</li>
+        <li>Client voice recordings: deleted within 90 days of receiving them, once we have written up what you told us. The written notes become part of your client records. You can ask us to delete a recording sooner.</li>
         <li>Website technical logs: kept by Netlify for a short period under its own retention rules.</li>
       </ul>
 

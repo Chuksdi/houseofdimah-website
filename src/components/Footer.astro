@@ -29,7 +29,6 @@ const budgets = ['A one-off project', 'Monthly support', 'Both', 'Not sure yet']
 
       <fieldset class="istep cur" data-step="1">
         <legend class="sr">Start here, step 1 of 3</legend>
-        <span class="label">Start here · step 1 of 3</span>
         <p class="ih">Tell us what's going on.</p>
         <p class="isub">Pick anything that's on your mind. More than one is fine, and "not sure yet" is a perfectly good answer too.</p>
         <div class="chips">
@@ -41,7 +40,6 @@ const budgets = ['A one-off project', 'Monthly support', 'Both', 'Not sure yet']
 
       <fieldset class="istep" data-step="2">
         <legend class="sr">Start here, step 2 of 3</legend>
-        <span class="label">Start here · step 2 of 3</span>
         <p class="ih">Who are we talking to?</p>
         <div class="fields">
           <div class="field"><label for="nm">Your name</label><input id="nm" name="name" type="text" autocomplete="name" required></div>
@@ -55,7 +53,6 @@ const budgets = ['A one-off project', 'Monthly support', 'Both', 'Not sure yet']
 
       <fieldset class="istep" data-step="3">
         <legend class="sr">Start here, step 3 of 3</legend>
-        <span class="label">Start here · step 3 of 3</span>
         <p class="ih">When are you thinking?</p>
         <div class="chips">
           {whens.map((w) => <label class="chip"><input type="radio" name="when" value={w}><span>{w}</span></label>)}
